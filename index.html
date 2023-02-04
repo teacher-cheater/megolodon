@@ -1,484 +1,548 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta name="CSRF_TOKEN" content="{CSRF_TOKEN}">	
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>{donate_title}</title> 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="/application/views/donate/shops/Default/css/toastr.min.css" type="text/css">
-		<script src="/application/views/donate/shops/Default/js/jquery-latest.min.js"></script>	
-		<script src="/application/views/donate/shops/Default/js/jquery.form.min.js"></script>	
-		<script src="/application/views/donate/shops/Default/js/toastr.min.js"></script>	    
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>	
-		<script src="/application/views/donate/shops/Default/js/jquery.history.js"></script>			
-	</head>
+  <head>
+    <meta name="CSRF_TOKEN" content="{CSRF_TOKEN}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{donate_title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="/application/views/donate/shops/Default/css/toastr.min.css"
+      type="text/css"
+    />
+    <script src="/application/views/donate/shops/Default/js/jquery-latest.min.js"></script>
+    <script src="/application/views/donate/shops/Default/js/jquery.form.min.js"></script>
+    <script src="/application/views/donate/shops/Default/js/toastr.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/application/views/donate/shops/Default/js/jquery.history.js"></script>
+  </head>
 
-		<style>
-			.for_center {
-			  position:fixed;
-			  top:50%;
-			  left:50%;
-			  margin-top:-50px; /* высота картинки пополам */
-			  margin-left:-100px; /* ширина картинки пополам */
-			}
-			
-			.map_div {
-				width: 490px;
-				height: 485px;
-				position: relative;
-			}
+  <style>
+    .for_center {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px; /* высота картинки пополам */
+      margin-left: -100px; /* ширина картинки пополам */
+    }
 
-			.map_pos {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 15px;
-				height: 15px;
-				border-radius: 50%;
-				-webkit-box-shadow: 0 0 7px 1px #000;
-				box-shadow: 0 0 7px 1px #000;
-				background-color: #ff1b00;
-				cursor: pointer;
-			}	
+    .map_div {
+      width: 490px;
+      height: 485px;
+      position: relative;
+    }
 
-			.player_pos {
-				background-color: #1bff4f;
-			}		
-			
+    .map_pos {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      -webkit-box-shadow: 0 0 7px 1px #000;
+      box-shadow: 0 0 7px 1px #000;
+      background-color: #ff1b00;
+      cursor: pointer;
+    }
 
-			.content-wrap{
-				margin: 0 auto ;
-			}
+    .player_pos {
+      background-color: #1bff4f;
+    }
 
-			/*#button_login{
-				position: relative;
-				padding: 10px 20px;
-				border-radius: 7px;
-				border: 1px solid rgb(61, 106, 255);
-				font-size: 14px;
-				text-transform: uppercase;
-				font-weight: 600;
-				letter-spacing: 2px;
-				background: transparent;
-				color: #fff;
-				overflow: hidden;
-				box-shadow: 0 0 0 0 transparent;
-				-webkit-transition: all 0.2s ease-in;
-				-moz-transition: all 0.2s ease-in;
-				transition: all 0.2s ease-in;
-			}
+    #navbar {
+      width: 100% !important;
+      background: rgba(6, 66, 9, 0.507) !important;
+      background: #000 !important;
+      /*margin: 0 auto !important;*/
+    }
 
-			#button_login:hover {
-				background: rgb(61, 106, 255);
-				box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-			}
+    /*.navbar-block nav {
+      background: rgba(6, 66, 9, 0.507) !important;
+    }*/
 
-			#button_login:hover::before {
-				-webkit-animation: sh02 0.5s 0s linear;
-				-moz-animation: sh02 0.5s 0s linear;
-				animation: sh02 0.5s 0s linear;
-			}
+    #navigation-list {
+      display: flex;
+      gap: 10px;
+      /*max-width: 1110px;*/
+      /*background: rgba(6, 66, 9, 0.507) !important;*/
+      justify-content: space-between !important;
+      /*position: fixed;*/
+      width: 100%;
 
-			#button_login::before {
-				content: '';
-				display: block;
-				width: 0px;
-				height: 86%;
-				position: absolute;
-				top: 7%;
-				left: 0%;
-				opacity: 0;
-				background: #fff;
-				box-shadow: 0 0 50px 30px #fff;
-				-webkit-transform: skewX(-20deg);
-				-moz-transform: skewX(-20deg);
-				-ms-transform: skewX(-20deg);
-				-o-transform: skewX(-20deg);
-				transform: skewX(-20deg);
-			}*/
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+    }
 
-			/*@keyframes sh02 {
-				from {
-					opacity: 0;
-					left: 0%;
-				}
+    .nav__fixed {
+      position: fixed;
+      width: 100%;
+      background: rgba(6, 66, 9, 0.507) !important;
+      justify-content: space-between !important;
+      top: 0;
+      -webkit-animation-name: show__navigation;
+      animation-name: show__navigation;
+      -webkit-animation-duration: 0.7s;
+      animation-duration: 0.7s;
+    }
 
-				50% {
-					opacity: 1;
-				}
+    @-webkit-keyframes show__navigation {
+      0% {
+        opacity: 0;
+        top: -60px;
+      }
+      100% {
+        opacity: 1;
+        top: 0;
+      }
+    }
 
-				to {
-					opacity: 0;
-					left: 100%;
-				}
-			}
+    @keyframes show__navigation {
+      0% {
+        opacity: 0;
+        top: -60px;
+      }
+      100% {
+        opacity: 1;
+        top: 0;
+      }
+    }
 
-			#button_login:active {
-				box-shadow: 0 0 0 0 transparent;
-				-webkit-transition: box-shadow 0.2s ease-in;
-				-moz-transition: box-shadow 0.2s ease-in;
-				transition: box-shadow 0.2s ease-in;
-			}*/
-			.navbar{
-				display: flex;
-				gap: 10px;
-				background: rgb(2,0,36);
-				background: linear-gradient(0deg, rgba(2,0,36,1) 9%, rgba(0,159,255,1) 96%, rgba(3,2,69,1) 100%);
-				width: 100%;
-				max-width: 1110px;
-				position: fixed;
-				top: 0;
-				left: 50%;
-				transform: translateX(-50%);
-				z-index: 100;
-			}
+    .navbar-collapse {
+      flex-grow: 0;
+    }
 
-			.nav__fixed{
-				position: fixed;
-				top: 0;
-				background-color: rgba(100, 96, 96, 0.5);
-				-webkit-animation-name: show__header;
-				animation-name: show__header;
-				-webkit-animation-duration: 0.7s;
-				animation-duration: 0.7s;
-			}
-			.nav-link{
-				display: inline-block;
-				position: relative;
-			}
-			.nav-link::after{
-				content: "";
-				position: absolute;
-				width: 100%;
-				-webkit-transform: scaleX(0);
-				-ms-transform: scaleX(0);
-				transform: scaleX(0);
-				height: 2px;
-				bottom: 0;
-				left: 0;
-				background-color: #fff;
-				-webkit-transform-origin: bottom right;
-				-ms-transform-origin: bottom right;
-				transform-origin: bottom right;
-				-webkit-transition: -webkit-transform 0.25s ease-out;
-				transition: -webkit-transform 0.25s ease-out;
-				-o-transition: transform 0.25s ease-out;
-				transition: transform 0.25s ease-out;
-				transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
-			}
-			.nav-link:hover::after {
-  			-webkit-transform: scaleX(1);
-				-ms-transform: scaleX(1);
-				transform: scaleX(1);
-  			-webkit-transform-origin: bottom left;
-				-ms-transform-origin: bottom left;
-				transform-origin: bottom left;
-}
-			#block_items {
-				padding-top: 90px;
-			}
-			.main-bg{
-				height: 224vh;
-				width: 100%;
-				margin-top: -16px;
-			}
-				
+    .nav-link {
+      display: inline-block;
+      position: relative;
+    }
 
-		</style>
-		
-		<script>
-			window.onscroll = function showHeader() {
-			const header = document.querySelector('.navbar');
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      -webkit-transform: scaleX(0);
+      -ms-transform: scaleX(0);
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #fff;
+      -webkit-transform-origin: bottom right;
+      -ms-transform-origin: bottom right;
+      transform-origin: bottom right;
+      -webkit-transition: -webkit-transform 0.25s ease-out;
+      transition: -webkit-transform 0.25s ease-out;
+      -o-transition: transform 0.25s ease-out;
+      transition: transform 0.25s ease-out;
+      transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+    }
 
-			if (window.pageYOffset > 60) {
-				header.classList.add('nav__fixed');
-			} else {
-				header.classList.remove('nav__fixed');
-			}
-		}
+    .nav-link:hover::after {
+      -webkit-transform: scaleX(1);
+      -ms-transform: scaleX(1);
+      transform: scaleX(1);
+      -webkit-transform-origin: bottom left;
+      -ms-transform-origin: bottom left;
+      transform-origin: bottom left;
+    }
 
-		</script>
-	
-	<body style="background-color: #2b2b2a">
-		<div class="content-wrap">
-			<div class="modal fade" tabindex="-1" role="dialog" id="timer" data-backdrop="static">
-				<div class="modal-dialog for_center" role="document">
-				<div class="card card-body">
-					<!--<font style="color: black">Подождите деактивацию слота: <span id="timer_minutes"></span>:<span id="timer_seconds"></span></font>-->
-				</div>
-				</div>
-			</div>
-			
+    #block_items {
+      padding-top: 90px;
+    }
 
-			<div class="modal fade" tabindex="-1" role="dialog" id="preload" data-backdrop="static">
-				<div class="modal-dialog for_center" role="document">
-				<div class="card card-body">
-					<!--<font style="color: black">Пожалуйста, подождите...<img src="/application/public/Preloader_5.gif"></font>-->
-				</div>
-				</div>
-			</div>
-		
-			<div class="" id="navbar">
-				<div class="mb-3">
-					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						<a href="#"><img width="30px" height="30px" src="img/logo.png" alt="logo"></a>
-						<a class="navbar-brand" href="#">{donate_name}</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Навигация">
-						<span class="navbar-toggler-icon"></span>
-						</button>
+    .main-bg {
+      height: 224vh;
+      width: 100%;
+      margin-top: -16px;
+    }
+  </style>
 
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto" id="navbarData">
-							<li class="nav-item active">
-							<a class="nav-link" href="/" onclick="">Правила</a>
-							</li>
+  <script>
+    window.onscroll = function showHeader() {
+      const header = document.querySelector(".navbar");
 
-							<li class="nav-item active">
-								<a class="nav-link" href="/aliance" onclick="">Кланы (в разработке)</a>
-							</li>
+      if (window.pageYOffset > 60) {
+        header.classList.add("nav__fixed");
+      } else {
+        header.classList.remove("nav__fixed");
+      }
+    };
+  </script>
 
-							<li class="nav-item active">
-								<a class="nav-link" href="/shop" onclick="">Мегашоп</a>
-							</li>
+  <body style="background-color: #2b2b2a">
+    <div class="content-wrap">
+      <div
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        id="timer"
+        data-backdrop="static"
+      >
+        <div class="modal-dialog for_center" role="document">
+          <div class="card card-body">
+            <!--<font style="color: black">Подождите деактивацию слота: <span id="timer_minutes"></span>:<span id="timer_seconds"></span></font>-->
+          </div>
+        </div>
+      </div>
 
-							<li class="nav-item active">
-								<a class="nav-link" href="/dino" onclick="">Мои динозавры</a>
-							</li>
+      <div
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        id="preload"
+        data-backdrop="static"
+      >
+        <div class="modal-dialog for_center" role="document">
+          <div class="card card-body">
+            <!--<font style="color: black">Пожалуйста, подождите...<img src="/application/public/Preloader_5.gif"></font>-->
+          </div>
+        </div>
+      </div>
 
-							<li class="nav-item active">
-							<a class="nav-link" href="/news" onclick="">Новости</a>
-							</li>
+      <div class="" id="navbar">
+        <div class="mb-3 navbar-block">
+          <nav class="navbar navbar-expand-lg navbar-dark" id="navigation-list">
+            <div class="navbar-left-block">
+              <a href="#"
+                ><img
+                  width="30px"
+                  height="30px"
+                  src="img/logo-m.png"
+                  alt="logo"
+              /></a>
+              <a class="navbar-brand" href="#">{donate_name}</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Навигация"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav navbar-right login-button">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/news" onclick="">Новости</a>
+                </li>
 
-							<li class="nav-item active theisle_navbar" style="display: none">
-							<a class="nav-link" href="/slots" onclick="initSlots();">Хранилище</a>
-							</li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/" onclick="">Правила</a>
+                </li>
 
-						</ul>
-						<ul class="nav navbar-nav navbar-right login-button">
-							<li class="nav-item active">
-								<a id="button_login" class="nav-link" href="#">Войти</a>
-							</li>
-						
-							<li class="nav-item active">
-								<a id="button_balance"  onclick="openModalPay()" class="nav-link" href="#" hidden>Баланс: 0руб.</a>
-							</li>
-							<li class="nav-item active">
-								<a id="button_profile" class="nav-link" href="/profile" onclick="" hidden>Профиль</a>
-							</li>
-							</li>
-						</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-				<div class="superpage" id="staticPageDiv" >
-					<div class="">
-						<img src="img/main-bg.jpg" class="main-bg" alt="bg">
-					</div>
-				</div>  
-			</div>	
-		</div>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/aliance" onclick="">Кланы</a>
+                </li>
 
-		<div class="container superpage" id="block_items" dpage="items">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/shop" onclick="">Мегашоп</a>
+                </li>
 
-		  <div class="row">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/dino" onclick="">Мои динозавры</a>
+                </li>
 
-			<div class="col-sm-9 order-first order-md-2" style="margin-bottom: 20px;">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Товары
-				</div>
-				<div class="card-body bg-dark text-light">
-					<div id="store-servers" class="text-center"></div>
-					<br>
-					<div id="store-categories" class="text-center"></div>
-					<br>
-					<div id="" class="text-center">
-					  <div class="input-group mb-2 mr-sm-2">
-						<div class="input-group-prepend">
-						  <div class="input-group-text">🔎</div>
-						</div>
-						<input type="text" class="form-control bg-secondary text-white" id="searchItemInput" placeholder="" oninput="setCategory(save_selected_category_id, save_selected_server_id)">
-					  </div>
-					  
-					</div>
-					<br>
-					<div id="store-items" class="row"></div>
+                <li
+                  class="nav-item active theisle_navbar"
+                  style="display: none"
+                >
+                  <a class="nav-link" href="/slots" onclick="initSlots();"
+                    >Хранилище</a
+                  >
+                </li>
 
-				</div>
-			  </div>
-			  <!--<font style="color: hsla(0,0%,100%,.3); font-size: 80%;">Размещенная на настоящем сайте информация носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями ч. 2 ст. 437 Гражданского кодекса Российской Федерации.</font>-->
-			</div>
-			
-			<div class="col-sm-3" style="margin-bottom: 20px;">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Мониторинг
-				</div>
-				<div class="card-body bg-dark text-light" id="monitoring_div">
+                <li class="nav-item active">
+                  <a id="button_login" class="nav-link" href="#">Войти</a>
+                </li>
 
-				</div>
-				<div class="card-header bg-secondary text-light">
-					<button type="button" class="btn btn-danger btn-block" onClick="updateMonitoring(true)">Обновить</button>
-				</div>		
-			  </div>
-			</div> 			
-			
-		  </div>  
-		  
-		</div>	
+                <li class="nav-item active">
+                  <a
+                    id="button_balance"
+                    onclick="openModalPay()"
+                    class="nav-link"
+                    href="#"
+                    hidden
+                    >Баланс: 0руб.</a
+                  >
+                </li>
+                <li class="nav-item active">
+                  <a
+                    id="button_profile"
+                    class="nav-link"
+                    href="/profile"
+                    onclick=""
+                    hidden
+                    >Профиль</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
 
-		<div class="container superpage" id="block_news" dpage="news" hidden>
+      <div class="superpage" id="staticPageDiv">
+        <div class="">
+          <img src="img/main-bg.jpg" class="main-bg" alt="bg" />
+        </div>
+      </div>
+    </div>
 
-		  <div class="row">
+    <div class="container superpage" id="block_items" dpage="items">
+      <div class="row">
+        <div
+          class="col-sm-9 order-first order-md-2"
+          style="margin-bottom: 20px"
+        >
+          <div class="">
+            <div class="card-header bg-secondary text-light">Товары</div>
+            <div class="card-body bg-dark text-light">
+              <div id="store-servers" class="text-center"></div>
+              <br />
+              <div id="store-categories" class="text-center"></div>
+              <br />
+              <div id="" class="text-center">
+                <div class="input-group mb-2 mr-sm-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">🔎</div>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control bg-secondary text-white"
+                    id="searchItemInput"
+                    placeholder=""
+                    oninput="setCategory(save_selected_category_id, save_selected_server_id)"
+                  />
+                </div>
+              </div>
+              <br />
+              <div id="store-items" class="row"></div>
+            </div>
+          </div>
+          <!--<font style="color: hsla(0,0%,100%,.3); font-size: 80%;">Размещенная на настоящем сайте информация носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями ч. 2 ст. 437 Гражданского кодекса Российской Федерации.</font>-->
+        </div>
 
-			<div class="col-sm-12 order-first order-md-2" style="margin-bottom: 20px;">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Новости
-				</div>
-				<div class="card-body bg-dark text-light" id="newsBlock" style="word-wrap: break-word;">
-				</div>
-			  </div>
-			</div>				
-			
-		  </div>  
-		  
-		</div>	
+        <div class="col-sm-3" style="margin-bottom: 20px">
+          <div class="">
+            <div class="card-header bg-secondary text-light">Мониторинг</div>
+            <div class="card-body bg-dark text-light" id="monitoring_div"></div>
+            <div class="card-header bg-secondary text-light">
+              <button
+                type="button"
+                class="btn btn-danger btn-block"
+                onClick="updateMonitoring(true)"
+              >
+                Обновить
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		<div class="container superpage" id="block_profile" dpage="profile" hidden>
+    <div class="container superpage" id="block_news" dpage="news" hidden>
+      <div class="row">
+        <div
+          class="col-sm-12 order-first order-md-2"
+          style="margin-bottom: 20px"
+        >
+          <div class="">
+            <div class="card-header bg-secondary text-light">Новости</div>
+            <div
+              class="card-body bg-dark text-light"
+              id="newsBlock"
+              style="word-wrap: break-word"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		  <div class="row mb-3">
-			<div class="col-sm-3 themed-grid-col"  style="margin-bottom: 20px;">
-			  <div class="">
+    <div class="container superpage" id="block_profile" dpage="profile" hidden>
+      <div class="row mb-3">
+        <div class="col-sm-3 themed-grid-col" style="margin-bottom: 20px">
+          <div class="">
+            <div class="card-body bg-dark text-light" id="">
+              <img src="" id="avatar_img" style="width: 100%" />
+              <h4 id="username_profile"></h4>
 
-				<div class="card-body bg-dark text-light" id="">
-					<img src="" id="avatar_img" style="width: 100%;">
-					<h4 id="username_profile"></h4>
-					
-					<button type="button" class="btn btn-danger btn-block" onClick="changeSubBlock('sub_profile')">Профиль</button>
-					<button type="button" class="btn btn-danger btn-block" onClick="changeSubBlock('sub_buys')">Купленные товары</button>
-					<button type="button" class="btn btn-danger btn-block" onClick="changeSubBlock('sub_invoices')">Платежи</button>
-					<button type="button" class="btn btn-danger btn-block" onClick="changeSubBlock('sub_promocodes')">Промокоды</button>
-				</div>
-				<div class="card-header bg-secondary text-light">
-					<button type="button" class="btn btn-danger btn-block" onClick="logout()">Выйти</button>
-				</div>		
-			  </div>
-			</div>
+              <button
+                type="button"
+                class="btn btn-danger btn-block"
+                onClick="changeSubBlock('sub_profile')"
+              >
+                Профиль
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger btn-block"
+                onClick="changeSubBlock('sub_buys')"
+              >
+                Купленные товары
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger btn-block"
+                onClick="changeSubBlock('sub_invoices')"
+              >
+                Платежи
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger btn-block"
+                onClick="changeSubBlock('sub_promocodes')"
+              >
+                Промокоды
+              </button>
+            </div>
+            <div class="card-header bg-secondary text-light">
+              <button
+                type="button"
+                class="btn btn-danger btn-block"
+                onClick="logout()"
+              >
+                Выйти
+              </button>
+            </div>
+          </div>
+        </div>
 
-			<div class="col-sm-9 themed-grid-col" id="sub_profile" style="margin-bottom: 20px;">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Профиль
-				</div>
-				<div class="card-body bg-dark text-light">
-
-					<table class="table table-dark">
+        <div
+          class="col-sm-9 themed-grid-col"
+          id="sub_profile"
+          style="margin-bottom: 20px"
+        >
+          <div class="">
+            <div class="card-header bg-secondary text-light">Профиль</div>
+            <div class="card-body bg-dark text-light">
+              <!--<table class="table table-dark">
 					  <thead id="table_userinfo">
 					  </tbody>
-					</table>
+					</table>-->
+            </div>
+          </div>
+        </div>
 
-				</div>
-			  </div>
-			</div>
+        <div
+          class="col-sm-9 themed-grid-col"
+          id="sub_buys"
+          hidden
+          style="margin-bottom: 20px"
+        >
+          <div class="">
+            <div class="card-header bg-secondary text-light">
+              Купленные товары
+            </div>
+            <div class="card-body bg-dark text-light">
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col" class="d-none d-sm-block">ID</th>
+                    <th scope="col">Товар</th>
+                    <th scope="col">Количество</th>
+                    <th scope="col" class="d-none d-sm-block">Цена</th>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Действие</th>
+                  </tr>
+                </thead>
+                <tbody id="table_buys"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-			<div class="col-sm-9 themed-grid-col" id="sub_buys" hidden style="margin-bottom: 20px;">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Купленные товары
-				</div>
-				<div class="card-body bg-dark text-light">
+        <div
+          class="col-sm-9 themed-grid-col"
+          id="sub_invoices"
+          hidden
+          style="margin-bottom: 20px"
+        >
+          <div class="">
+            <div class="card-header bg-secondary text-light">Платежи</div>
+            <div class="card-body bg-dark text-light">
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Сумма</th>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Статус</th>
+                  </tr>
+                </thead>
+                <tbody id="table_invoices"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
-					<table class="table table-dark">
-					  <thead>
-						<tr>
-						  <th scope="col" class="d-none d-sm-block">ID</th>
-						  <th scope="col">Товар</th>
-						  <th scope="col">Количество</th>
-						  <th scope="col" class="d-none d-sm-block">Цена</th>		
-						  <th scope="col">Дата</th>		
-						  <th scope="col">Действие</th>	
-						</tr>
-					  </thead>
-					  <tbody id="table_buys">
+        <div
+          class="col-sm-9 themed-grid-col"
+          id="sub_promocodes"
+          hidden
+          style="margin-bottom: 20px"
+        >
+          <div class="">
+            <div class="card-header bg-secondary text-light">Промокоды</div>
+            <div class="card-body bg-dark text-light">
+              <div class="form-row align-items-center">
+                <div class="col-auto">
+                  <label class="sr-only" for="">Промокод</label>
+                  <input
+                    type="text"
+                    class="form-control mb-2"
+                    id="promocode"
+                    placeholder="Введите промокод"
+                  />
+                </div>
+                <div class="col-auto">
+                  <button
+                    class="btn btn-secondary mb-2"
+                    onclick="activatePromo()"
+                  >
+                    Активировать
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-					  </tbody>
-					</table>
-
-				</div>
-			  </div>
-			</div>	
-
-			<div class="col-sm-9 themed-grid-col" id="sub_invoices" hidden style="margin-bottom: 20px;">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Платежи
-				</div>
-				<div class="card-body bg-dark text-light">
-
-					<table class="table table-dark">
-					  <thead>
-						<tr>
-						  <th scope="col">ID</th>
-						  <th scope="col">Сумма</th>
-						  <th scope="col">Дата</th>
-						  <th scope="col">Статус</th>
-						</tr>
-					  </thead>
-					  <tbody id="table_invoices">
-
-					  </tbody>
-					</table>
-
-				</div>
-			  </div>
-			</div>	
-
-			<div class="col-sm-9 themed-grid-col" id="sub_promocodes" hidden style="margin-bottom: 20px;">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Промокоды
-				</div>
-				<div class="card-body bg-dark text-light">
-				  <div class="form-row align-items-center">
-					<div class="col-auto">
-					  <label class="sr-only" for="">Промокод</label>
-					  <input type="text" class="form-control mb-2" id="promocode" placeholder="Введите промокод">
-					</div>
-					<div class="col-auto">
-					  <button class="btn btn-secondary mb-2" onclick="activatePromo()">Активировать</button>
-					</div>
-				  </div>
-				</div>
-			  </div>
-			</div>	
-			
-		  </div>  
-		  
-		</div>	
-
-		<div class="container superpage" id="block_mSlots" dpage="slots" hidden>
-			<div class="themed-grid-col">
-			  <div class="">
-				<div class="card-header bg-secondary text-light">
-				  Хранилище
-				</div>
-				<div class="card-body bg-dark text-light justify-content-centers text-center">
-					<div id="slots-servers">Загрузка...</div>
-					<br>
-					<div id="store-slots" class="card-deck row justify-content-md-center"></div>
-				</div>
-			  </div>
-			</div> 		  
-		</div>	
-
-	</body>
+    <div class="container superpage" id="block_mSlots" dpage="slots" hidden>
+      <div class="themed-grid-col">
+        <div class="">
+          <div class="card-header bg-secondary text-light">Хранилище</div>
+          <div
+            class="card-body bg-dark text-light justify-content-centers text-center"
+          >
+            <div id="slots-servers">Загрузка...</div>
+            <br />
+            <div
+              id="store-slots"
+              class="card-deck row justify-content-md-center"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalPay">
@@ -486,61 +550,78 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Пополнение баланса</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="">
-		  <div class="form-group">
-			<label for="">Сумма платежа</label>
-			<input type="" class="form-control" id="sumPay" aria-describedby="" placeholder="Введите сумму в руб">
-			<small id="" class="form-text text-muted">Вы будете перенаправлены на сайт платежной системы для пополнения счета магазина.</small>
-		  </div>        
+        <div class="form-group">
+          <label for="">Сумма платежа</label>
+          <input
+            type=""
+            class="form-control"
+            id="sumPay"
+            aria-describedby=""
+            placeholder="Введите сумму в руб"
+          />
+          <small id="" class="form-text text-muted"
+            >Вы будете перенаправлены на сайт платежной системы для пополнения
+            счета магазина.</small
+          >
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="buttonPay" onclick="pay()" class="btn btn-primary">Пополнить</button>
+        <button
+          type="button"
+          id="buttonPay"
+          onclick="pay()"
+          class="btn btn-primary"
+        >
+          Пополнить
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-	  <style>
-
-.roulette:before {
+<style>
+  .roulette:before {
     border-top: 24px solid #cd422a;
-}
+  }
 
-.roulette:after, .roulette:before {
-    content: '';
+  .roulette:after,
+  .roulette:before {
+    content: "";
     position: absolute;
     left: 50%;
     margin: -16px 0 0 -48px;
     border-left: 48px solid transparent;
     border-right: 48px solid transparent;
-}
+  }
 
-.roulette {
+  .roulette {
     margin: -15px -15px 0;
     position: relative;
     padding: 16px;
     white-space: nowrap;
     overflow: hidden;
-}
+  }
 
-
-.roulette:after {
+  .roulette:after {
     bottom: 0;
     border-bottom: 24px solid #cd422a;
-}
+  }
 
-
-
-
-.roulette-item {
+  .roulette-item {
     background: #656464;
-}
+  }
 
-.roulette-item {
+  .roulette-item {
     display: inline-block;
     width: 240px;
     text-align: center;
@@ -550,46 +631,51 @@
     -ms-user-select: none;
     user-select: none;
     border-radius: 2px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
-}
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
 
-.roulette-item__image {
+  .roulette-item__image {
     width: 240px;
     height: 240px;
     overflow: hidden;
     border-radius: 8px;
     padding: 16px;
-}
+  }
 
-.roulette-item__description {
+  .roulette-item__description {
     padding: 16px;
-}
-
+  }
 </style>
-
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalItem">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Покупка товара</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="phModalItem">
-        
-      </div>
-	  
+      <div class="modal-body" id="phModalItem"></div>
+
       <div class="modal-footer">
-    <div class="form-group col-md-7">
-      <select class="form-control" id="dprice_bonus">
-        <option value="0" id="payBalance">Оплатить деньгами</option>	  
-        <option value="1" id="payBonus" hidden>Оплатить бонусами</option>
-      </select>
-    </div>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-        <button type="button" id="buttonOrderItem" class="btn btn-primary">Купить</button>
+        <div class="form-group col-md-7">
+          <select class="form-control" id="dprice_bonus">
+            <option value="0" id="payBalance">Оплатить деньгами</option>
+            <option value="1" id="payBonus" hidden>Оплатить бонусами</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Закрыть
+        </button>
+        <button type="button" id="buttonOrderItem" class="btn btn-primary">
+          Купить
+        </button>
       </div>
     </div>
   </div>
@@ -600,72 +686,131 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Выдача товара</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="">
-			<div class="form-group">
-				<div id="blockModalGiveOrder"></div>
-			</div>
-			
-		  <div class="form-group">
-			<label for="">Выберите сервер</label>
-			<select class="form-control" id="selectServerOrder"></select>
-		  </div>        
+        <div class="form-group">
+          <div id="blockModalGiveOrder"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Выберите сервер</label>
+          <select class="form-control" id="selectServerOrder"></select>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-        <button type="button" id="button_OrderItem" id="buttonGiveOrder" class="btn btn-primary">Выдать товар</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Закрыть
+        </button>
+        <button
+          type="button"
+          id="button_OrderItem"
+          id="buttonGiveOrder"
+          class="btn btn-primary"
+        >
+          Выдать товар
+        </button>
       </div>
     </div>
   </div>
 </div>
-
-
 
 <div class="modal fade" tabindex="-1" role="dialog" id="ModalMSlotsEdit">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Управление слотом</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="">
-  <div class="row">
-    <div class="col-8">
-
-	
-	<div class="map_div" id ="map_block">
-		<img id="map" src="">
-	</div>	
-		
-
-    </div>
-    <div class="col-4">
-	
-        <button type="button" id="buttonOnSlot" class="btn btn-primary btn-block">Активировать слот</button>  		
-        <button type="button" id="buttonOffSlot" class="btn btn-danger btn-block" data-dismiss="modal">Деактивировать слот</button>
-        <button type="button" id="buttonClearSlot" class="btn btn-warning btn-block" data-dismiss="modal">Очистить слот</button>	
-		<button type="button" id="buttonChangeColorSkinSlotLoad" class="btn btn-primary btn-block" data-dismiss="modal">Сменить цвет дино</button>
-		<button type="button" id="buttonChangeGenderSlot" class="btn btn-success btn-block" data-dismiss="modal">Сменить пол</button>
-		<button type="button" id="buttonGiftDino" class="btn btn-primary btn-block" data-dismiss="modal">Подарить другу</button>
-		<button type="button" id="buttonTransferSlot" class="btn btn-primary btn-block" data-dismiss="modal">Перенос на другой сервер</button>
-		Стоимость:
-		<!--<font size="2">		
+        <div class="row">
+          <div class="col-8">
+            <div class="map_div" id="map_block">
+              <img id="map" src="" />
+            </div>
+          </div>
+          <div class="col-4">
+            <button
+              type="button"
+              id="buttonOnSlot"
+              class="btn btn-primary btn-block"
+            >
+              Активировать слот
+            </button>
+            <button
+              type="button"
+              id="buttonOffSlot"
+              class="btn btn-danger btn-block"
+              data-dismiss="modal"
+            >
+              Деактивировать слот
+            </button>
+            <button
+              type="button"
+              id="buttonClearSlot"
+              class="btn btn-warning btn-block"
+              data-dismiss="modal"
+            >
+              Очистить слот
+            </button>
+            <button
+              type="button"
+              id="buttonChangeColorSkinSlotLoad"
+              class="btn btn-primary btn-block"
+              data-dismiss="modal"
+            >
+              Сменить цвет дино
+            </button>
+            <button
+              type="button"
+              id="buttonChangeGenderSlot"
+              class="btn btn-success btn-block"
+              data-dismiss="modal"
+            >
+              Сменить пол
+            </button>
+            <button
+              type="button"
+              id="buttonGiftDino"
+              class="btn btn-primary btn-block"
+              data-dismiss="modal"
+            >
+              Подарить другу
+            </button>
+            <button
+              type="button"
+              id="buttonTransferSlot"
+              class="btn btn-primary btn-block"
+              data-dismiss="modal"
+            >
+              Перенос на другой сервер
+            </button>
+            Стоимость:
+            <!--<font size="2">		
 			<br>Смена пола Survival:<i id="costSurvivalGender"></i>
 			<br>Смена пола Progression:<i id="costProgressionGender"></i>
 			<br>Смена пола Evrima:<i id="costOtherGender"></i>
 			<br>Телепортация:<i id="costTP"></i>
 			<br>Смена цвета динозвра:<i id="costChangeColorSkin"></i>			
 		</font>-->
-    </div>
-  </div>    
-  <div class="modal-body" id="phModalMSlotsEdit"></div>
+          </div>
+        </div>
+        <div class="modal-body" id="phModalMSlotsEdit"></div>
       </div>
-
     </div>
   </div>
 </div>
@@ -675,20 +820,30 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Перенос слота на другой сервер</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="">     
-			  <div class="form-group">
-				<label for="">Выберите сервер</label>
-				<select id="server_transfer_slot" class="form-control">
-					<option>Загрузка</option>
-				</select>
-			  </div>
+      <div class="modal-body" id="">
+        <div class="form-group">
+          <label for="">Выберите сервер</label>
+          <select id="server_transfer_slot" class="form-control">
+            <option>Загрузка</option>
+          </select>
+        </div>
 
-			  <button class="btn btn-primary" id="buttonTransferSlotSend" onclick="TransferSlot()">Перенести</button>
-
+        <button
+          class="btn btn-primary"
+          id="buttonTransferSlotSend"
+          onclick="TransferSlot()"
+        >
+          Перенести
+        </button>
       </div>
     </div>
   </div>
@@ -699,18 +854,33 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Подарить другу</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="">     
-			  <div class="form-group">
-				<label for="">ID профиля получателя</label>
-				<input type="text" class="form-control" id="giftDinoRecipient" placeholder="Введите ID профиля">
-			  </div>
+      <div class="modal-body" id="">
+        <div class="form-group">
+          <label for="">ID профиля получателя</label>
+          <input
+            type="text"
+            class="form-control"
+            id="giftDinoRecipient"
+            placeholder="Введите ID профиля"
+          />
+        </div>
 
-			  <button class="btn btn-primary" id="buttonGiftDinoSend" onclick="GiftDino()">Подарить</button>
-
+        <button
+          class="btn btn-primary"
+          id="buttonGiftDinoSend"
+          onclick="GiftDino()"
+        >
+          Подарить
+        </button>
       </div>
     </div>
   </div>
@@ -721,14 +891,25 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Покупка дополнительного слота</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="phModalMSlotsBuy">
-      </div>
+      <div class="modal-body" id="phModalMSlotsBuy"></div>
       <div class="modal-footer">
-        <button type="button" id="buttonBuySlot" onclick="buySlot()" class="btn btn-primary">Купить слот</button>
+        <button
+          type="button"
+          id="buttonBuySlot"
+          onclick="buySlot()"
+          class="btn btn-primary"
+        >
+          Купить слот
+        </button>
       </div>
     </div>
   </div>
@@ -739,22 +920,32 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Выберите способ оплаты</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="">
-	  
-		<div class="form-group col-md-7">
-		  <select class="form-control" id="dprice_bonus_answer">
-			<option value="0" id="payBalance">Оплатить деньгами</option>	  
-			<option value="1" id="payBonus">Оплатить бонусами</option>
-		  </select>
-		</div>	  
-	  
+        <div class="form-group col-md-7">
+          <select class="form-control" id="dprice_bonus_answer">
+            <option value="0" id="payBalance">Оплатить деньгами</option>
+            <option value="1" id="payBonus">Оплатить бонусами</option>
+          </select>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="buttonBuyAnswer" onclick="" class="btn btn-primary">Оплатить</button>
+        <button
+          type="button"
+          id="buttonBuyAnswer"
+          onclick=""
+          class="btn btn-primary"
+        >
+          Оплатить
+        </button>
       </div>
     </div>
   </div>
@@ -765,74 +956,83 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Смена цвета динозавра</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" id="">
-	  
-	  <style>
-		input[name^=field]{
-		  display: none;
-		}
-		input[name^=field] + label{
-		  display: inline-block;
-		  vertical-align: top;
-		  width: 20px;
-		  height: 20px;
-		}
-		input[name^=field]:checked + label{
-		  pointer-events: auto;
-		  background: green;
-		  color: #fff;
-		  border: 3px solid #ffffff;
-		}
-	  </style>
-	  
-	<span id="BodyChangeColorSkin">  
-		Detail:
-		<span id="detailCheck"> 
-			<input type="radio" name="field" id="mc1" style=""> 
-			<label for="mc1"></label>
-		</span>
-		
-		<br>Underbelly:
-		<span id="underbellyCheck"> 
-			<input type="radio" name="field2" id="mc2" style=""> 
-			<label for="mc2"></label>
-		</span>		
-		
-		<br>Body 1:
-		<span id="Body1Check"> 
-			<input type="radio" name="field2" id="mc2" style=""> 
-			<label for="mc2"></label>
-		</span>	
-		
-		<br>Body 2:
-		<span id="Body2Check"> 
-			<input type="radio" name="field2" id="mc2" style=""> 
-			<label for="mc2"></label>
-		</span>	
-		
-		<br>Body 3:
-		<span id="Body3Check"> 
-			<input type="radio" name="field2" id="mc2" style=""> 
-			<label for="mc2"></label>
-		</span>	
-		
-		<br>Pattern Variation:
-		  <select class="form-control" id="patternVariationCheck">
-			<option value="0" id="">Выключено</option>	  
-			<option value="4" id="">Мало</option>
-			<option value="6" id="">Средне</option>	  
-			<option value="8" id="">Много</option>			
-		  </select>
-		  
-	</span>	
-	
+        <style>
+          input[name^="field"] {
+            display: none;
+          }
+          input[name^="field"] + label {
+            display: inline-block;
+            vertical-align: top;
+            width: 20px;
+            height: 20px;
+          }
+          input[name^="field"]:checked + label {
+            pointer-events: auto;
+            background: green;
+            color: #fff;
+            border: 3px solid #ffffff;
+          }
+        </style>
+
+        <span id="BodyChangeColorSkin">
+          Detail:
+          <span id="detailCheck">
+            <input type="radio" name="field" id="mc1" style="" />
+            <label for="mc1"></label>
+          </span>
+
+          <br />Underbelly:
+          <span id="underbellyCheck">
+            <input type="radio" name="field2" id="mc2" style="" />
+            <label for="mc2"></label>
+          </span>
+
+          <br />Body 1:
+          <span id="Body1Check">
+            <input type="radio" name="field2" id="mc2" style="" />
+            <label for="mc2"></label>
+          </span>
+
+          <br />Body 2:
+          <span id="Body2Check">
+            <input type="radio" name="field2" id="mc2" style="" />
+            <label for="mc2"></label>
+          </span>
+
+          <br />Body 3:
+          <span id="Body3Check">
+            <input type="radio" name="field2" id="mc2" style="" />
+            <label for="mc2"></label>
+          </span>
+
+          <br />Pattern Variation:
+          <select class="form-control" id="patternVariationCheck">
+            <option value="0" id="">Выключено</option>
+            <option value="4" id="">Мало</option>
+            <option value="6" id="">Средне</option>
+            <option value="8" id="">Много</option>
+          </select>
+        </span>
       </div>
       <div class="modal-footer">
-        <button type="button" id="buttonChangeColorSkinSlot" onclick="" class="btn btn-primary">Оплатить деньгами (0руб.)</button>
+        <button
+          type="button"
+          id="buttonChangeColorSkinSlot"
+          onclick=""
+          class="btn btn-primary"
+        >
+          Оплатить деньгами (0руб.)
+        </button>
       </div>
     </div>
   </div>
@@ -843,24 +1043,43 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Авторизация</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="">     
+      <div class="modal-body" id="">
+        <div class="form-group">
+          <label for="">Email</label>
+          <input
+            type=""
+            class="form-control"
+            id="login_email"
+            aria-describedby=""
+            placeholder="Введите ваш Email"
+          />
+          <small id="" class="form-text text-muted"
+            >Email, который был указан при регистрации.</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="">Пароль</label>
+          <input
+            type="password"
+            class="form-control"
+            id="login_password"
+            placeholder="Введите ваш пароль"
+          />
+        </div>
 
-			  <div class="form-group">
-				<label for="">Email</label>
-				<input type="" class="form-control" id="login_email" aria-describedby="" placeholder="Введите ваш Email">
-				<small id="" class="form-text text-muted">Email, который был указан при регистрации.</small>
-			  </div>
-			  <div class="form-group">
-				<label for="">Пароль</label>
-				<input type="password" class="form-control" id="login_password" placeholder="Введите ваш пароль">
-			  </div>
-
-			  <button class="btn btn-primary" onclick="login()">Войти</button> или <button onclick="openModalRegister()" class="btn btn-primary">Зарегистрироваться</button>
-
+        <button class="btn btn-primary" onclick="login()">Войти</button> или
+        <button onclick="openModalRegister()" class="btn btn-primary">
+          Зарегистрироваться
+        </button>
       </div>
     </div>
   </div>
@@ -871,902 +1090,1103 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Регистрация</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="">     
+      <div class="modal-body" id="">
+        <div class="form-group">
+          <label for="">Ник</label>
+          <input
+            type=""
+            class="form-control"
+            id="register_username"
+            aria-describedby=""
+            placeholder="Введите ваш ник"
+          />
+          <small id="" class="form-text text-muted"
+            >Укажите ник, под которым вы играете на сервере.</small
+          >
+        </div>
 
-			  <div class="form-group">
-				<label for="">Ник</label>
-				<input type="" class="form-control" id="register_username" aria-describedby="" placeholder="Введите ваш ник">
-				<small id="" class="form-text text-muted">Укажите ник, под которым вы играете на сервере.</small>
-			  </div>
+        <div class="form-group">
+          <label for="">Email</label>
+          <input
+            type=""
+            class="form-control"
+            id="register_email"
+            aria-describedby=""
+            placeholder="Введите ваш Email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="">Пароль</label>
+          <input
+            type="password"
+            class="form-control"
+            id="register_password"
+            placeholder="Введите ваш пароль"
+          />
+        </div>
 
-			  <div class="form-group">
-				<label for="">Email</label>
-				<input type="" class="form-control" id="register_email" aria-describedby="" placeholder="Введите ваш Email">
-			  </div>
-			  <div class="form-group">
-				<label for="">Пароль</label>
-				<input type="password" class="form-control" id="register_password" placeholder="Введите ваш пароль">
-			  </div>
-
-			  <button class="btn btn-primary" onclick="register()">Зарегистрироваться</button> или <button onclick="openModalLogin()" class="btn btn-primary">Войти</button>
-
+        <button class="btn btn-primary" onclick="register()">
+          Зарегистрироваться
+        </button>
+        или
+        <button onclick="openModalLogin()" class="btn btn-primary">
+          Войти
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+  $.ajaxSetup({
+    headers: { "X-CSRF-TOKEN": $('meta[name="CSRF_TOKEN"]').attr("content") },
+  });
 
+  function login() {
+    email = $("#login_email").val();
+    password = $("#login_password").val();
 
+    $.post(
+      "/login/{donate_id}",
+      { email: email, password: password },
+      function (data) {
+        ////console.log(data);
+        data = $.parseJSON(data);
+        switch (data.status) {
+          case "error":
+            toastr.error(data.error);
+            break;
+          case "success":
+            ////console.log(data.monitoring);
+            toastr.success(data.success);
 
+            setTimeout("location.reload();", 1500);
+            break;
+        }
+      }
+    );
+  }
 
+  function register() {
+    username = $("#register_username").val();
+    email = $("#register_email").val();
+    password = $("#register_password").val();
 
-	$.ajaxSetup({
-		headers:{ 'X-CSRF-TOKEN': $('meta[name="CSRF_TOKEN"]').attr('content') }
-	});
-	
-	function login(){
-		email = $("#login_email").val();
-		password = $("#login_password").val();
-	
-	
-		$.post("/login/{donate_id}",{email:email, password:password},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':				
-					////console.log(data.monitoring);		
-					toastr.success(data.success);
-					
-					setTimeout("location.reload();", 1500);
-					break;
-				}
-			});				
-	}
-	
-	function register(){
-		username = $("#register_username").val();
-		email = $("#register_email").val();
-		password = $("#register_password").val();
-	
-	
-		$.post("/register/{donate_id}",{username:username, email:email, password:password},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':				
-					////console.log(data.monitoring);		
-					toastr.success(data.success);
-					
-					setTimeout("location.reload();", 1500);
-					break;
-				}
-			});			
-	}
+    $.post(
+      "/register/{donate_id}",
+      { username: username, email: email, password: password },
+      function (data) {
+        ////console.log(data);
+        data = $.parseJSON(data);
+        switch (data.status) {
+          case "error":
+            toastr.error(data.error);
+            break;
+          case "success":
+            ////console.log(data.monitoring);
+            toastr.success(data.success);
 
+            setTimeout("location.reload();", 1500);
+            break;
+        }
+      }
+    );
+  }
 
-	function openModalRegister(){
-		$('#ModalLogin').modal('hide');
-		setTimeout("$('#ModalRegister').modal('show')", 500);
-	}
+  function openModalRegister() {
+    $("#ModalLogin").modal("hide");
+    setTimeout("$('#ModalRegister').modal('show')", 500);
+  }
 
-	function openModalLogin(){
-		$('#ModalRegister').modal('hide');
-		setTimeout("$('#ModalLogin').modal('show')", 500);
-	}
+  function openModalLogin() {
+    $("#ModalRegister").modal("hide");
+    setTimeout("$('#ModalLogin').modal('show')", 500);
+  }
 
-	loadLink();
+  loadLink();
 
-	function loadLink(){
-		if(window.location.pathname.split('/')[1] == ""){
-			$(".superpage").attr("hidden", "");
-			$("div[dpage='items']").removeAttr('hidden');		
-		}else if(window.location.pathname.split('/')[1] != "page"){
-			$(".superpage").attr("hidden", "");
-			$("div[dpage='"+window.location.pathname.split('/')[1]+"']").removeAttr('hidden');
-		
-			if(news && window.location.pathname.split('/')[1] == 'news' && window.location.pathname.split('/')[2]){
-				openNews();
-			}
-		}	
-	}
+  function loadLink() {
+    if (window.location.pathname.split("/")[1] == "") {
+      $(".superpage").attr("hidden", "");
+      $("div[dpage='items']").removeAttr("hidden");
+    } else if (window.location.pathname.split("/")[1] != "page") {
+      $(".superpage").attr("hidden", "");
+      $(
+        "div[dpage='" + window.location.pathname.split("/")[1] + "']"
+      ).removeAttr("hidden");
 
-	function openNews(){
-		news_id = window.location.pathname.split('/')[2];
-	
-		check_ok = false;
-			
-		for(x in news){
-				if(news[x]['dnews_id'] === news_id){
-					//changeBlock();
-					$(".superpage").attr("hidden", "");
-					
-					check_ok = true;
-					$("#staticPageHead").html(news[x].dnews_description);
-					$("#staticPageText").html(news[x].dnews_text);
-					$('#staticPageDiv').removeAttr('hidden');
-					break;
-				}
-		}
-			
-		if(!check_ok) toastr.error("Новость не найдена.");		
-	}
+      if (
+        news &&
+        window.location.pathname.split("/")[1] == "news" &&
+        window.location.pathname.split("/")[2]
+      ) {
+        openNews();
+      }
+    }
+  }
 
-	var save_url = window.location.pathname;
-	$( "body" ).on('click', 'a', function(e){
-		e.preventDefault();		
-	
-		if($(this).attr('href').split('://')[0] == 'https' || $(this).attr('href').split('://')[0] == 'http') window.location.replace($(this).attr('href')); //redirect($(this).attr('href'));
-		
-		if($(this).attr('href') == '' || $(this).attr('class') == 'fancybox' || $(this).attr('href') == undefined || ($(this).attr('href') && ($(this).attr('href').search('javascript') != -1 || $(this).attr('href').search('#') != -1)) || ($(this).attr('class') && $(this).attr('class').search('not_redirect') != -1)){
-			return;
-		}			
-		
+  function openNews() {
+    news_id = window.location.pathname.split("/")[2];
 
-		save_url = window.location.pathname;
-		History.pushState(null, document.title, $(this).attr('href'));			
-		
-		loadStaticPage();
-		
-		loadLink();
-	
-	});	
-	
-	var firstRun = false;
-	var firstRunModules = false;
-	var firstRunPages = false;
-	
-	var mMavbarsIsSet = false;
-	
-	var modules = [];
-	var servers = [];
-	var items = [];
-	var categories = [];
-	var orders = [];
-	
-	var pages = [];
-	var news = [];
-	
-	var giveOrderOnlineOrOffline = -1;
-	
-	$('#preload').modal('show');
-	init();
-	
-	function loadStaticPage(){
-		if(window.location.pathname.split('/')[1] == "page"){
-			//if(firstRun)
-			//	$('#preload').modal('show');
-		
-			url_static = window.location.pathname.split('/')[2];
-			
-			
-			check_ok = false;
-			
-			for(x in pages){
-				if(pages[x]['dpage_url'] === url_static){
-					//changeBlock();
-					$(".superpage").attr("hidden", "");
-					
-					check_ok = true;
-					$("#staticPageHead").html(pages[x].dpage_head);
-					$("#staticPageText").html(pages[x].dpage_text);
-					$('#staticPageDiv').removeAttr('hidden');
-					break;
-				}
-			}
-			
-			if(!check_ok) toastr.error("Страница не найдена.");
-				
-		}	
-	}
-	
-	function init(){
-		getShopData();
-		
-		updateItems();
-		updateMonitoring();	
-	
-		if(!firstRun){
-			firstRun = true;
-			setTimeout("$('#preload').modal('hide')", 1500);
-		}
-	}
-	
-	function getShopData(){
-		$.post("/getShopData/{donate_id}",{},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':
-					modules = data.modules;
-					pages = data.pages;
-					
-					news = data.news;
-					html = "";
-					
-					news_size = 120;
-					for(x in news){	
-						news_text = news[x]['dnews_text'];
-						if(news_text.length > news_size){
-							news_text = news_text.slice(0, news_size) + '...';
-						}
-						//var news_text = news_text.replace(/............................................................................./g,"$&<br>").replace(/\/$/g,"");
-						
+    check_ok = false;
 
-						html += '\
+    for (x in news) {
+      if (news[x]["dnews_id"] === news_id) {
+        //changeBlock();
+        $(".superpage").attr("hidden", "");
+
+        check_ok = true;
+        $("#staticPageHead").html(news[x].dnews_description);
+        $("#staticPageText").html(news[x].dnews_text);
+        $("#staticPageDiv").removeAttr("hidden");
+        break;
+      }
+    }
+
+    if (!check_ok) toastr.error("Новость не найдена.");
+  }
+
+  var save_url = window.location.pathname;
+  $("body").on("click", "a", function (e) {
+    e.preventDefault();
+
+    if (
+      $(this).attr("href").split("://")[0] == "https" ||
+      $(this).attr("href").split("://")[0] == "http"
+    )
+      window.location.replace($(this).attr("href")); //redirect($(this).attr('href'));
+
+    if (
+      $(this).attr("href") == "" ||
+      $(this).attr("class") == "fancybox" ||
+      $(this).attr("href") == undefined ||
+      ($(this).attr("href") &&
+        ($(this).attr("href").search("javascript") != -1 ||
+          $(this).attr("href").search("#") != -1)) ||
+      ($(this).attr("class") &&
+        $(this).attr("class").search("not_redirect") != -1)
+    ) {
+      return;
+    }
+
+    save_url = window.location.pathname;
+    History.pushState(null, document.title, $(this).attr("href"));
+
+    loadStaticPage();
+
+    loadLink();
+  });
+
+  var firstRun = false;
+  var firstRunModules = false;
+  var firstRunPages = false;
+
+  var mMavbarsIsSet = false;
+
+  var modules = [];
+  var servers = [];
+  var items = [];
+  var categories = [];
+  var orders = [];
+
+  var pages = [];
+  var news = [];
+
+  var giveOrderOnlineOrOffline = -1;
+
+  $("#preload").modal("show");
+  init();
+
+  function loadStaticPage() {
+    if (window.location.pathname.split("/")[1] == "page") {
+      //if(firstRun)
+      //	$('#preload').modal('show');
+
+      url_static = window.location.pathname.split("/")[2];
+
+      check_ok = false;
+
+      for (x in pages) {
+        if (pages[x]["dpage_url"] === url_static) {
+          //changeBlock();
+          $(".superpage").attr("hidden", "");
+
+          check_ok = true;
+          $("#staticPageHead").html(pages[x].dpage_head);
+          $("#staticPageText").html(pages[x].dpage_text);
+          $("#staticPageDiv").removeAttr("hidden");
+          break;
+        }
+      }
+
+      if (!check_ok) toastr.error("Страница не найдена.");
+    }
+  }
+
+  function init() {
+    getShopData();
+
+    updateItems();
+    updateMonitoring();
+
+    if (!firstRun) {
+      firstRun = true;
+      setTimeout("$('#preload').modal('hide')", 1500);
+    }
+  }
+
+  function getShopData() {
+    $.post("/getShopData/{donate_id}", {}, function (data) {
+      ////console.log(data);
+      data = $.parseJSON(data);
+      switch (data.status) {
+        case "error":
+          toastr.error(data.error);
+          break;
+        case "success":
+          modules = data.modules;
+          pages = data.pages;
+
+          news = data.news;
+          html = "";
+
+          news_size = 120;
+          for (x in news) {
+            news_text = news[x]["dnews_text"];
+            if (news_text.length > news_size) {
+              news_text = news_text.slice(0, news_size) + "...";
+            }
+            //var news_text = news_text.replace(/............................................................................./g,"$&<br>").replace(/\/$/g,"");
+
+            html +=
+              '\
 							<div class="mb-2">\
-								<h1 class="">'+news[x]['dnews_description']+'</h1>\
-								'+news_text+'\
+								<h1 class="">' +
+              news[x]["dnews_description"] +
+              "</h1>\
+								" +
+              news_text +
+              '\
 								<div class="pull-right" style="font-size: 12px;">\
-									<div class="text-right""><a class="btn btn-secondary" href="/news/'+news[x]['dnews_id']+'" role="button">Показать новость</a></div>\
-									<div class="text-right">'+news[x]['dnews_datetime']+'</div>\
+									<div class="text-right""><a class="btn btn-secondary" href="/news/' +
+              news[x]["dnews_id"] +
+              '" role="button">Показать новость</a></div>\
+									<div class="text-right">' +
+              news[x]["dnews_datetime"] +
+              '</div>\
 								</div>\
 							</div>\
 							<hr class="my-4">\
-						';						
-					}
-					document.getElementById("newsBlock").innerHTML = html;
-					if(news && window.location.pathname.split('/')[1] == 'news' && window.location.pathname.split('/')[2]){
-						openNews();
-					}
-					
-					
-					giveOrderOnlineOrOffline = data.giveOrderOnlineOrOffline;
-					
-					loadStaticPage();
-					
-					//loadLink();
-					
-					var navbarData = document.getElementById("navbarData");
-					if(pages && !firstRunPages){
-						for(x in pages){
-							var str = '\
-								<a class="nav-link" href="/page/'+pages[x]['dpage_url']+'" onclick="">'+pages[x]['dpage_head']+'</a>\
-							';
-							var li = document.createElement('li');
-							li.innerHTML = str;
-							li.className = "nav-item active";
-							navbarData.appendChild(li);
-						}
-						firstRunPages = true;
-					}	
-						
-					if(data.isLogged == false){
-						if(data.game_type == 0)
-							$("#button_login").attr("onclick", "$('#ModalLogin').modal('show')");
-						else if(data.game_type == 1)
-							$("#button_login").attr("href", data.url_login);
-					}else{
-					
-						if(data.game_donate == 'theisle'){
-							$('.theisle_navbar').show();
-						}
-					
-						current_timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-					
-						$.post("/validateTimer/{donate_id}/true",{current_timezone:current_timezone},function(data){
-							if(data){
-								//toastr.warning("В данный момент ваши действия ограничены таймером. Все функции сайта будут доступны через: "+data);	
-								initializeClock(data);
-								setTimeout("$('#timer').modal('show')", 1000);		
-								//$('#timer').modal('show');
-							}								
-						});	
-		
-						//if(data.timer){
-							//toastr.warning("В данный момент ваши действия ограничены таймером. Все функции сайта будут доступны через: "+data.timer);
-	
-						//}
-						$("#button_login").attr("hidden", "");
-						$('#button_balance').removeAttr('hidden');
-						$('#button_profile').removeAttr('hidden');
-						
-						
-						
-						$('#navbar').find('#button_balance').text(data.balance+"руб.");
-						
-						
-						$("#username_profile").text(data.nick);
-						$("#avatar_img").attr("src", data.avatar);
+						';
+          }
+          document.getElementById("newsBlock").innerHTML = html;
+          if (
+            news &&
+            window.location.pathname.split("/")[1] == "news" &&
+            window.location.pathname.split("/")[2]
+          ) {
+            openNews();
+          }
 
-						html ='\
+          giveOrderOnlineOrOffline = data.giveOrderOnlineOrOffline;
+
+          loadStaticPage();
+
+          //loadLink();
+
+          var navbarData = document.getElementById("navbarData");
+          if (pages && !firstRunPages) {
+            for (x in pages) {
+              var str =
+                '\
+								<a class="nav-link" href="/page/' +
+                pages[x]["dpage_url"] +
+                '" onclick="">' +
+                pages[x]["dpage_head"] +
+                "</a>\
+							";
+              var li = document.createElement("li");
+              li.innerHTML = str;
+              li.className = "nav-item active";
+              navbarData.appendChild(li);
+            }
+            firstRunPages = true;
+          }
+
+          if (data.isLogged == false) {
+            if (data.game_type == 0)
+              $("#button_login").attr(
+                "onclick",
+                "$('#ModalLogin').modal('show')"
+              );
+            else if (data.game_type == 1)
+              $("#button_login").attr("href", data.url_login);
+          } else {
+            if (data.game_donate == "theisle") {
+              $(".theisle_navbar").show();
+            }
+
+            current_timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            $.post(
+              "/validateTimer/{donate_id}/true",
+              { current_timezone: current_timezone },
+              function (data) {
+                if (data) {
+                  //toastr.warning("В данный момент ваши действия ограничены таймером. Все функции сайта будут доступны через: "+data);
+                  initializeClock(data);
+                  setTimeout("$('#timer').modal('show')", 1000);
+                  //$('#timer').modal('show');
+                }
+              }
+            );
+
+            //if(data.timer){
+            //toastr.warning("В данный момент ваши действия ограничены таймером. Все функции сайта будут доступны через: "+data.timer);
+
+            //}
+            $("#button_login").attr("hidden", "");
+            $("#button_balance").removeAttr("hidden");
+            $("#button_profile").removeAttr("hidden");
+
+            $("#navbar")
+              .find("#button_balance")
+              .text(data.balance + "руб.");
+
+            $("#username_profile").text(data.nick);
+            $("#avatar_img").attr("src", data.avatar);
+
+            html =
+              "\
 							<tr>\
 							  <th>ID профиля</th>\
-							  <th>'+data.userid+'</th>\
+							  <th>" +
+              data.userid +
+              "</th>\
 							</tr>\
-						';
+						";
 
-						if(data.email){
-							html +=	'\
+            if (data.email) {
+              html +=
+                "\
 								<tr>\
 									<th>Email</th>\
-								  <th>'+data.email+'</th>\
+								  <th>" +
+                data.email +
+                "</th>\
 								</tr>\
-							';
-						}
-						
-						if(data.steamid){
-							html +=	'\
+							";
+            }
+
+            if (data.steamid) {
+              html +=
+                "\
 								<tr>\
 								  <th>SteamID</th>\
-								  <th>'+data.steamid+'</th>\
+								  <th>" +
+                data.steamid +
+                "</th>\
 								</tr>\
-							';
-						}
-						html +=	'\
+							";
+            }
+            html +=
+              "\
 							<tr>\
 							  <th>Баланс</th>\
-							  <th>'+data.balance+' руб.</th>\
+							  <th>" +
+              data.balance +
+              " руб.</th>\
 							</tr>\
-						';
-						
-						html +=	'\
+						";
+
+            html +=
+              "\
 							<tr>\
 							  <th>Бонусный баланс</th>\
-							  <th>'+data.bonus+' руб.</th>\
+							  <th>" +
+              data.bonus +
+              " руб.</th>\
 							</tr>\
-						';	
+						";
 
-						document.getElementById("table_userinfo").innerHTML = html;
+            document.getElementById("table_userinfo").innerHTML = html;
 
-						document.getElementById("table_invoices").innerHTML = '';
-						var table_invoices = document.getElementById("table_invoices");
-						
-						for(x in data.invoices){
-							if(data.invoices[x].dinv_status == 0)
-								status = "Не оплачено";
-							else if(data.invoices[x].dinv_status == 1)
-								status = "Оплачено";
-							else
-								status = "Неизвестно";
-							
-							var str = '\
-								<td>'+data.invoices[x].dinv_id+'</td>\
-								<td>'+data.invoices[x].dinv_amount+'руб.</td>\
-								<td>'+data.invoices[x].dinv_date+'</td>\
-								<td>'+status+'</td>\
-							';
-							var tr = document.createElement('tr');
-							tr.innerHTML = str;
-							table_invoices.appendChild(tr);
-						}
+            document.getElementById("table_invoices").innerHTML = "";
+            var table_invoices = document.getElementById("table_invoices");
 
+            for (x in data.invoices) {
+              if (data.invoices[x].dinv_status == 0) status = "Не оплачено";
+              else if (data.invoices[x].dinv_status == 1) status = "Оплачено";
+              else status = "Неизвестно";
 
-						document.getElementById("table_buys").innerHTML = '';
-						var table_buys = document.getElementById("table_buys");
+              var str =
+                "\
+								<td>" +
+                data.invoices[x].dinv_id +
+                "</td>\
+								<td>" +
+                data.invoices[x].dinv_amount +
+                "руб.</td>\
+								<td>" +
+                data.invoices[x].dinv_date +
+                "</td>\
+								<td>" +
+                status +
+                "</td>\
+							";
+              var tr = document.createElement("tr");
+              tr.innerHTML = str;
+              table_invoices.appendChild(tr);
+            }
 
-						orders = data.orders;
-		
-						for(x in data.orders){
-							if(data.orders[x].dorder_status == 0)
-								action = '<button type="button" class="btn btn-secondary btn-sm" onclick="openModalGiveOrder('+x+')">Выдача товара</button>';
-							else if(data.orders[x].dorder_status == 1)
-								action = "Товар выдан";
-							
-							var str = '\
-								<td class="d-none d-sm-block">'+data.orders[x].dorder_id+'</td>\
-								<td>'+data.orders[x].dprice_name+'</td>\
-								<td>'+data.orders[x].dorder_counts+'</td>\
-								<td class="d-none d-sm-block">'+data.orders[x].dprice_cost+'</td>\
-								<td>'+data.orders[x].dorder_datetime+'</td>\
-								<td>'+action+'</td>\
-							';
-							var tr = document.createElement('tr');
-							tr.innerHTML = str;
-							table_buys.appendChild(tr);
-						}
-					}
-					break;
-				}
-			});	
-	}
+            document.getElementById("table_buys").innerHTML = "";
+            var table_buys = document.getElementById("table_buys");
 
-	function updateMonitoring(visPreload){
-		if(visPreload)
-			$('#preload').modal('show');
-		
-		$.post("/GetServersMonitoring/{donate_id}",{},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':				
-					////console.log(data.monitoring);
-					
-					document.getElementById("monitoring_div").innerHTML = '';
-					var monitoring_div = document.getElementById("monitoring_div");
-					
-					for(x in data.monitoring){
-						if(data.monitoring[x].status == true){
-							status = data.monitoring[x].players+" / "+data.monitoring[x].maxplayers;
-							percent = 100 * data.monitoring[x].players/data.monitoring[x].maxplayers;
-						}else{
-							status = "Выключен";
-							percent = 100;
-						}
-						
-						var str = '\
-							'+data.monitoring[x].server_shopname+'\
+            orders = data.orders;
+
+            for (x in data.orders) {
+              if (data.orders[x].dorder_status == 0)
+                action =
+                  '<button type="button" class="btn btn-secondary btn-sm" onclick="openModalGiveOrder(' +
+                  x +
+                  ')">Выдача товара</button>';
+              else if (data.orders[x].dorder_status == 1)
+                action = "Товар выдан";
+
+              var str =
+                '\
+								<td class="d-none d-sm-block">' +
+                data.orders[x].dorder_id +
+                "</td>\
+								<td>" +
+                data.orders[x].dprice_name +
+                "</td>\
+								<td>" +
+                data.orders[x].dorder_counts +
+                '</td>\
+								<td class="d-none d-sm-block">' +
+                data.orders[x].dprice_cost +
+                "</td>\
+								<td>" +
+                data.orders[x].dorder_datetime +
+                "</td>\
+								<td>" +
+                action +
+                "</td>\
+							";
+              var tr = document.createElement("tr");
+              tr.innerHTML = str;
+              table_buys.appendChild(tr);
+            }
+          }
+          break;
+      }
+    });
+  }
+
+  function updateMonitoring(visPreload) {
+    if (visPreload) $("#preload").modal("show");
+
+    $.post("/GetServersMonitoring/{donate_id}", {}, function (data) {
+      ////console.log(data);
+      data = $.parseJSON(data);
+      switch (data.status) {
+        case "error":
+          toastr.error(data.error);
+          break;
+        case "success":
+          ////console.log(data.monitoring);
+
+          document.getElementById("monitoring_div").innerHTML = "";
+          var monitoring_div = document.getElementById("monitoring_div");
+
+          for (x in data.monitoring) {
+            if (data.monitoring[x].status == true) {
+              status =
+                data.monitoring[x].players +
+                " / " +
+                data.monitoring[x].maxplayers;
+              percent =
+                (100 * data.monitoring[x].players) /
+                data.monitoring[x].maxplayers;
+            } else {
+              status = "Выключен";
+              percent = 100;
+            }
+
+            var str =
+              "\
+							" +
+              data.monitoring[x].server_shopname +
+              '\
 							<div class="progress">\
-								<div role="progressbar" class="progress-bar progress-bar-striped active progress-bar-danger" style="width: '+percent+'%;"></div>\
+								<div role="progressbar" class="progress-bar progress-bar-striped active progress-bar-danger" style="width: ' +
+              percent +
+              '%;"></div>\
 							</div>\
-							'+status+'\
-						';
-						var div = document.createElement('div');
-						div.innerHTML = str;
-						monitoring_div.appendChild(div);					
-					}
-					
-					
-					if(visPreload)
-						setTimeout("$('#preload').modal('hide')", 500);				
-					
-					break;
-				}
-			});	
-	}
+							' +
+              status +
+              "\
+						";
+            var div = document.createElement("div");
+            div.innerHTML = str;
+            monitoring_div.appendChild(div);
+          }
 
-	function updateItems(){
-		$.post("/GetShop/{donate_id}",{},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':	
-					items = data.items;
-					categories = data.categories;
-					servers = data.servers;
-					
-					set_servers = '<button role="button" class="btn btn-default btn-danger" onclick="updateListCategory(-1)">Все</button>\n';				
-					for(x in data.servers){
-						set_servers += '<button role="button" class="btn btn-default btn-danger" onclick="updateListCategory('+data.servers[x].dserver_id+')">'+data.servers[x].server_name+'</button>\n';
-					}					
-					document.getElementById("store-servers").innerHTML = set_servers;
-					
-					updateListCategory(-1);
+          if (visPreload) setTimeout("$('#preload').modal('hide')", 500);
 
-					if(!firstRunModules){
-						firstRunModules = true;
-						initModules();
-					}
-					break;
-				}
-			});	
-	}
+          break;
+      }
+    });
+  }
 
-	function updateListCategory(server_id){
-		set_cat = '<button role="button" class="btn btn-default btn-danger" onclick="setCategory(-1, '+server_id+')">Все</button>\n';				
-		for(x in categories){
-			set_cat += '<button role="button" class="btn btn-default btn-danger" onclick="setCategory('+categories[x].category_id+', '+server_id+')">'+categories[x].category_name+'</button>\n';
-		}					
-		document.getElementById("store-categories").innerHTML = set_cat;
-	
-		setCategory(-1, server_id);
-	}
+  function updateItems() {
+    $.post("/GetShop/{donate_id}", {}, function (data) {
+      ////console.log(data);
+      data = $.parseJSON(data);
+      switch (data.status) {
+        case "error":
+          toastr.error(data.error);
+          break;
+        case "success":
+          items = data.items;
+          categories = data.categories;
+          servers = data.servers;
 
-	var save_selected_server_id = -1;
-	var save_selected_category_id = -1;
+          set_servers =
+            '<button role="button" class="btn btn-default btn-danger" onclick="updateListCategory(-1)">Все</button>\n';
+          for (x in data.servers) {
+            set_servers +=
+              '<button role="button" class="btn btn-default btn-danger" onclick="updateListCategory(' +
+              data.servers[x].dserver_id +
+              ')">' +
+              data.servers[x].server_name +
+              "</button>\n";
+          }
+          document.getElementById("store-servers").innerHTML = set_servers;
 
-	function setCategory(category_id, server_id){
-		search = $("#searchItemInput").val();
-	
-		save_selected_server_id = server_id;
-		save_selected_category_id = category_id;
-		
-					document.getElementById("store-items").innerHTML = '';
-					var store_items = document.getElementById("store-items");
-					//console.log(items);
-					for(x in items){
-						if(category_id != items[x].category_id && category_id != -1) continue;
-						if(server_id != items[x].dserver_id && server_id != -1 && items[x].dserver_id != 0) continue;
-						if(items[x].server_isVisible == 0 && items[x].dserver_id != 0) continue;
-						
-						if(search && items[x].item_name.toLowerCase().indexOf(search.toLowerCase()) == -1) continue;
-						
+          updateListCategory(-1);
 
-						if(items[x].item_cost_bonus)
-							str = '<span class="" style="font-size: 12px">'+items[x].item_cost+' RUB '+items[x].item_cost_bonus+' BONUS</span>';
-						else
-							str = '<span class="" style="font-size: 12px">'+items[x].item_cost+' RUB</span>';
-						
-						str += '<img class="" src="'+items[x].item_img+'" style="width: 100%;">\
-							'+items[x].item_name+'\
-						';
-						
-						var div = document.createElement('div');
-						div.className = "col-xs-6 col-md-4 col-lg-3";
-						//div.style = "min-width: 20px; background: rgba(0,0,0,.5); border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0; margin: 1px;";
-						//div.style = "background: rgba(0,0,0,.5); border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0; margin: 20%; /* Отступы вокруг элемента */";
-						div.innerHTML = str;
-						div.id = "item_" + items[x].item_id;
-						store_items.appendChild(div);	
-						$("#item_" + items[x].item_id).attr("onclick", "openModalItem("+x+")");						
-						
-					}			
-	}
+          if (!firstRunModules) {
+            firstRunModules = true;
+            initModules();
+          }
+          break;
+      }
+    });
+  }
 
-	function logout(){
-		window.location.replace("/logout/{donate_id}");
-	}
+  function updateListCategory(server_id) {
+    set_cat =
+      '<button role="button" class="btn btn-default btn-danger" onclick="setCategory(-1, ' +
+      server_id +
+      ')">Все</button>\n';
+    for (x in categories) {
+      set_cat +=
+        '<button role="button" class="btn btn-default btn-danger" onclick="setCategory(' +
+        categories[x].category_id +
+        ", " +
+        server_id +
+        ')">' +
+        categories[x].category_name +
+        "</button>\n";
+    }
+    document.getElementById("store-categories").innerHTML = set_cat;
 
-	function changeBlock(block){
-		$(".superpage").attr("hidden", "");
-	 
-		if(block)
-			$('#'+block).removeAttr('hidden');
-	}
+    setCategory(-1, server_id);
+  }
 
-	function changeSubBlock(block){
-		$("#sub_profile").attr("hidden", "");
-		$("#sub_buys").attr("hidden", "");
-		$("#sub_invoices").attr("hidden", "");
-		$("#sub_promocodes").attr("hidden", "");
-		
-		$('#'+block).removeAttr('hidden');
-	}
+  var save_selected_server_id = -1;
+  var save_selected_category_id = -1;
 
-	function giveOrder(dorder_id, type){
-		if(giveOrderOnlineOrOffline == 0 || type == true){
-			if(!confirm("Внимание!!! Для продолжения данного действия вы НЕ должны быть на сервере!!! Иначе товар не будет выдан.")) return;
-		}else if(giveOrderOnlineOrOffline == 1){
-			if(!confirm("Внимание!!! Для продолжения данного действия вы ДОЛЖНЫ быть на сервере!!! Иначе товар не будет выдан.")) return;
-		}
-		
-		$('#ModalGiveOrder').modal('hide');
-		setTimeout("$('#preload').modal('show')", 500);
-		
-		selectServerOrder = $("#selectServerOrder option:selected").val();
-		
-		$.post("/giveOrder/{donate_id}",{dserver_id:selectServerOrder, dorder_id: dorder_id},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					setTimeout("$('#preload').modal('hide')", 1500);
-					break;
-				case 'success':	
-					toastr.success(data.success);
-					init();
-					setTimeout("$('#preload').modal('hide')", 1500);
-					break;
-				}
-			});			
-	}
-	
-	function openModalItem(item_inc){
-	
-		$('#ModalItem').modal('show');
-		
-		////console.log(items[item_inc]);
-		
-		html = "";
+  function setCategory(category_id, server_id) {
+    search = $("#searchItemInput").val();
 
-		if(items[item_inc].item_type == 3){
-			html += '<div class="row">';			
+    save_selected_server_id = server_id;
+    save_selected_category_id = category_id;
 
-			//html += '<div class="roulette__train">';
-			
-			all_items = items[item_inc].items;
-			
-			for(x in all_items){
-				html += '<div class="col-xs-6 col-sm-4 col-md-3">';	
-				
-				html += '\
+    document.getElementById("store-items").innerHTML = "";
+    var store_items = document.getElementById("store-items");
+    //console.log(items);
+    for (x in items) {
+      if (category_id != items[x].category_id && category_id != -1) continue;
+      if (
+        server_id != items[x].dserver_id &&
+        server_id != -1 &&
+        items[x].dserver_id != 0
+      )
+        continue;
+      if (items[x].server_isVisible == 0 && items[x].dserver_id != 0) continue;
+
+      if (
+        search &&
+        items[x].item_name.toLowerCase().indexOf(search.toLowerCase()) == -1
+      )
+        continue;
+
+      if (items[x].item_cost_bonus)
+        str =
+          '<span class="" style="font-size: 12px">' +
+          items[x].item_cost +
+          " RUB " +
+          items[x].item_cost_bonus +
+          " BONUS</span>";
+      else
+        str =
+          '<span class="" style="font-size: 12px">' +
+          items[x].item_cost +
+          " RUB</span>";
+
+      str +=
+        '<img class="" src="' +
+        items[x].item_img +
+        '" style="width: 100%;">\
+							' +
+        items[x].item_name +
+        "\
+						";
+
+      var div = document.createElement("div");
+      div.className = "col-xs-6 col-md-4 col-lg-3";
+      //div.style = "min-width: 20px; background: rgba(0,0,0,.5); border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0; margin: 1px;";
+      //div.style = "background: rgba(0,0,0,.5); border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0; margin: 20%; /* Отступы вокруг элемента */";
+      div.innerHTML = str;
+      div.id = "item_" + items[x].item_id;
+      store_items.appendChild(div);
+      $("#item_" + items[x].item_id).attr(
+        "onclick",
+        "openModalItem(" + x + ")"
+      );
+    }
+  }
+
+  function logout() {
+    window.location.replace("/logout/{donate_id}");
+  }
+
+  function changeBlock(block) {
+    $(".superpage").attr("hidden", "");
+
+    if (block) $("#" + block).removeAttr("hidden");
+  }
+
+  function changeSubBlock(block) {
+    $("#sub_profile").attr("hidden", "");
+    $("#sub_buys").attr("hidden", "");
+    $("#sub_invoices").attr("hidden", "");
+    $("#sub_promocodes").attr("hidden", "");
+
+    $("#" + block).removeAttr("hidden");
+  }
+
+  function giveOrder(dorder_id, type) {
+    if (giveOrderOnlineOrOffline == 0 || type == true) {
+      if (
+        !confirm(
+          "Внимание!!! Для продолжения данного действия вы НЕ должны быть на сервере!!! Иначе товар не будет выдан."
+        )
+      )
+        return;
+    } else if (giveOrderOnlineOrOffline == 1) {
+      if (
+        !confirm(
+          "Внимание!!! Для продолжения данного действия вы ДОЛЖНЫ быть на сервере!!! Иначе товар не будет выдан."
+        )
+      )
+        return;
+    }
+
+    $("#ModalGiveOrder").modal("hide");
+    setTimeout("$('#preload').modal('show')", 500);
+
+    selectServerOrder = $("#selectServerOrder option:selected").val();
+
+    $.post(
+      "/giveOrder/{donate_id}",
+      { dserver_id: selectServerOrder, dorder_id: dorder_id },
+      function (data) {
+        ////console.log(data);
+        data = $.parseJSON(data);
+        switch (data.status) {
+          case "error":
+            toastr.error(data.error);
+            setTimeout("$('#preload').modal('hide')", 1500);
+            break;
+          case "success":
+            toastr.success(data.success);
+            init();
+            setTimeout("$('#preload').modal('hide')", 1500);
+            break;
+        }
+      }
+    );
+  }
+
+  function openModalItem(item_inc) {
+    $("#ModalItem").modal("show");
+
+    ////console.log(items[item_inc]);
+
+    html = "";
+
+    if (items[item_inc].item_type == 3) {
+      html += '<div class="row">';
+
+      //html += '<div class="roulette__train">';
+
+      all_items = items[item_inc].items;
+
+      for (x in all_items) {
+        html += '<div class="col-xs-6 col-sm-4 col-md-3">';
+
+        html +=
+          '\
 					<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">\
-						<div class="card-header">'+all_items[x]['item_name']+' ('+all_items[x]['item_count']+'шт.)</div>\
+						<div class="card-header">' +
+          all_items[x]["item_name"] +
+          " (" +
+          all_items[x]["item_count"] +
+          'шт.)</div>\
 						<div class="card-body">\
-							<img class="card-img" src="'+all_items[x]['item_img']+'" alt="">\
+							<img class="card-img" src="' +
+          all_items[x]["item_img"] +
+          '" alt="">\
 						</div>\
 					</div>';
 
-				html += '</div>';	
-			}
-			
-			//html += '</div>';
-					
-			html += '</div>';
-			
-			
-			
-			
+        html += "</div>";
+      }
 
-			html += '<div class="card">\
+      //html += '</div>';
+
+      html += "</div>";
+
+      html +=
+        '<div class="card">\
 						<div class="card-header">\
 							Информация\
 						</div>\
 						<div class="card-body">\
-							'+items[item_inc].item_description+'\
+							' +
+        items[item_inc].item_description +
+        "\
 						</div>\
-					</div>';
-		}else if(items[item_inc].item_type == 4){
-			html += '<div class="roulette">';		
-			html += '<div class="roulette__railway" style="margin-left: -465px;">';
-			html += '<div class="roulette__train">';
-			
-			for(let i = 0; i < 46; i++){
-				all_items = items[item_inc].items;
-				keys = Object.keys(all_items);
-				random = all_items[keys[ keys.length * Math.random() << 0]];
-				html += '<div class="roulette-item">\
-								<img class="roulette-item__image" src="'+random['item_img']+'">\
+					</div>";
+    } else if (items[item_inc].item_type == 4) {
+      html += '<div class="roulette">';
+      html += '<div class="roulette__railway" style="margin-left: -465px;">';
+      html += '<div class="roulette__train">';
+
+      for (let i = 0; i < 46; i++) {
+        all_items = items[item_inc].items;
+        keys = Object.keys(all_items);
+        random = all_items[keys[(keys.length * Math.random()) << 0]];
+        html +=
+          '<div class="roulette-item">\
+								<img class="roulette-item__image" src="' +
+          random["item_img"] +
+          '">\
 								<div class="roulette-item__description">\
-									<h4>'+random['item_name']+'</h4>\
-									<b> '+random['item_count']+'шт.</b>\
+									<h4>' +
+          random["item_name"] +
+          "</h4>\
+									<b> " +
+          random["item_count"] +
+          "шт.</b>\
 								</div>\
-						</div>';
-			}	
-			
-			html += '</div>';
-			html += '</div>';
-			html += '</div>';
-			
-			it = "";
-			for(x in items[item_inc]['items'])
-				it += items[item_inc]['items'][x]['item_name']+" "+items[item_inc]['items'][x]['item_count']+'шт.<br>';
-			
-			html += '<div class="card">\
+						</div>";
+      }
+
+      html += "</div>";
+      html += "</div>";
+      html += "</div>";
+
+      it = "";
+      for (x in items[item_inc]["items"])
+        it +=
+          items[item_inc]["items"][x]["item_name"] +
+          " " +
+          items[item_inc]["items"][x]["item_count"] +
+          "шт.<br>";
+
+      html +=
+        '<div class="card">\
 						<div class="card-header">\
 							Информация\
 						</div>\
 						<div class="card-body">\
 							Может выпасть:<br>\
-							'+it+'\
+							' +
+        it +
+        "\
 							<br>\
-							'+items[item_inc].item_description+'\
+							" +
+        items[item_inc].item_description +
+        "\
 						</div>\
-					</div>';
-		}else{
-			html += items[item_inc].item_description;
-			html += "<br>Количество: "+items[item_inc].item_count+'шт.';
-		}
-		
-		
-		
-		
-		if(items[item_inc].dserver_id == 0)
-			html += "<br>Товар доступен на всех серверах.";
-		else
-			html += "<br>Товар доступен на сервере: "+items[item_inc].server_name;
+					</div>";
+    } else {
+      html += items[item_inc].item_description;
+      html += "<br>Количество: " + items[item_inc].item_count + "шт.";
+    }
 
-		$("#phModalItem").html(html);
-		
-		if(items[item_inc].item_type == 4)
-			$("#buttonOrderItem").attr("onclick", "buyRoulette("+items[item_inc].item_id+")");
-		else
-			$("#buttonOrderItem").attr("onclick", "buyItem("+items[item_inc].item_id+")");
-		
-		
-		
-		
-		
-		if(items[item_inc]['item_bonus'])
-			$('#payBonus').removeAttr('hidden');
-		else
-			$("#payBonus").attr("hidden", "");
-		
-		
-		$('#dprice_bonus #payBalance').text('Оплатить деньгами ('+items[item_inc].item_cost+' рублей)');
-		$('#dprice_bonus #payBonus').text('Оплатить бонусами ('+items[item_inc].item_cost_bonus+' бонусов)');
-		
-		resizeWindow();
-	}
+    if (items[item_inc].dserver_id == 0)
+      html += "<br>Товар доступен на всех серверах.";
+    else
+      html += "<br>Товар доступен на сервере: " + items[item_inc].server_name;
 
-	$(window).on("resize", function(event){
-		resizeWindow();
-	});
-	
-	function resizeWindow(){
-		if($(this).width() < 992){
-			$(".roulette__railway").attr('style', 'margin-left: -665px;');
-		}else{
-			$(".roulette__railway").attr('style', 'margin-left: -465px;');
-		}
-	}
+    $("#phModalItem").html(html);
 
-	function openModalGiveOrder(dorder_inc){
-		$("#button_OrderItem").attr("onclick", 'giveOrder('+orders[dorder_inc].dorder_id+', '+orders[dorder_inc].type+')');
-		var selectServerOrder = document.getElementById("selectServerOrder");
-		selectServerOrder.options.length = 0;
-		
-		if(orders[dorder_inc].dserver_id != 0){
-			for(x in servers)
-				if(servers[x].dserver_id == orders[dorder_inc].dserver_id){
-					selectServerOrder.options[selectServerOrder.options.length] = new Option(servers[x].server_name, servers[x].dserver_id);
-					break;
-				}
-		}else
-			for(x in servers)
-				selectServerOrder.options[selectServerOrder.options.length] = new Option(servers[x].server_name, servers[x].dserver_id);
-	
-	
-		html = 'Товар: '+orders[dorder_inc].dprice_name;
-		$("#blockModalGiveOrder").html(html);
-		
-	
-		$('#ModalGiveOrder').modal('show');
-	}
+    if (items[item_inc].item_type == 4)
+      $("#buttonOrderItem").attr(
+        "onclick",
+        "buyRoulette(" + items[item_inc].item_id + ")"
+      );
+    else
+      $("#buttonOrderItem").attr(
+        "onclick",
+        "buyItem(" + items[item_inc].item_id + ")"
+      );
 
-	function buyRoulette(item_id){
-		dprice_bonus = $("#dprice_bonus option:selected").val()
-		$('#buttonOrderItem').prop('disabled', true);
-		
-		$.post("/buyRoulette/{donate_id}",{item_id: item_id, dprice_bonus:dprice_bonus},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					$('#buttonOrderItem').prop('disabled', false);
-					break;
-				case 'success':		
-					prize = data.prize;
-					html = '<img class="roulette-item__image" src="'+prize['item_img']+'">\
+    if (items[item_inc]["item_bonus"]) $("#payBonus").removeAttr("hidden");
+    else $("#payBonus").attr("hidden", "");
+
+    $("#dprice_bonus #payBalance").text(
+      "Оплатить деньгами (" + items[item_inc].item_cost + " рублей)"
+    );
+    $("#dprice_bonus #payBonus").text(
+      "Оплатить бонусами (" + items[item_inc].item_cost_bonus + " бонусов)"
+    );
+
+    resizeWindow();
+  }
+
+  $(window).on("resize", function (event) {
+    resizeWindow();
+  });
+
+  function resizeWindow() {
+    if ($(this).width() < 992) {
+      $(".roulette__railway").attr("style", "margin-left: -665px;");
+    } else {
+      $(".roulette__railway").attr("style", "margin-left: -465px;");
+    }
+  }
+
+  function openModalGiveOrder(dorder_inc) {
+    $("#button_OrderItem").attr(
+      "onclick",
+      "giveOrder(" +
+        orders[dorder_inc].dorder_id +
+        ", " +
+        orders[dorder_inc].type +
+        ")"
+    );
+    var selectServerOrder = document.getElementById("selectServerOrder");
+    selectServerOrder.options.length = 0;
+
+    if (orders[dorder_inc].dserver_id != 0) {
+      for (x in servers)
+        if (servers[x].dserver_id == orders[dorder_inc].dserver_id) {
+          selectServerOrder.options[selectServerOrder.options.length] =
+            new Option(servers[x].server_name, servers[x].dserver_id);
+          break;
+        }
+    } else
+      for (x in servers)
+        selectServerOrder.options[selectServerOrder.options.length] =
+          new Option(servers[x].server_name, servers[x].dserver_id);
+
+    html = "Товар: " + orders[dorder_inc].dprice_name;
+    $("#blockModalGiveOrder").html(html);
+
+    $("#ModalGiveOrder").modal("show");
+  }
+
+  function buyRoulette(item_id) {
+    dprice_bonus = $("#dprice_bonus option:selected").val();
+    $("#buttonOrderItem").prop("disabled", true);
+
+    $.post(
+      "/buyRoulette/{donate_id}",
+      { item_id: item_id, dprice_bonus: dprice_bonus },
+      function (data) {
+        ////console.log(data);
+        data = $.parseJSON(data);
+        switch (data.status) {
+          case "error":
+            toastr.error(data.error);
+            $("#buttonOrderItem").prop("disabled", false);
+            break;
+          case "success":
+            prize = data.prize;
+            html =
+              '<img class="roulette-item__image" src="' +
+              prize["item_img"] +
+              '">\
 								<div class="roulette-item__description">\
-									<h4>'+prize['item_name']+'</h4>\
-									<b> '+prize['item_count']+'шт.</b>\
-							</div>';	  
-	  
-					$(".roulette-item").eq(35).html(html);
-		
-		
-					if($(window).width() < 992){
-						marginLeftRoulette = -665;
-						marginLeftRouletteStop = -8873
-					}else{
-						marginLeftRoulette = -465;
-						marginLeftRouletteStop = -8673;
-					}
-		
-					$(".roulette__railway").animate({marginLeft:marginLeftRoulette}, 1, 
-						function(){
+									<h4>' +
+              prize["item_name"] +
+              "</h4>\
+									<b> " +
+              prize["item_count"] +
+              "шт.</b>\
+							</div>";
 
-							$(".roulette__railway").animate({marginLeft:marginLeftRouletteStop}, 1000,
-							function(){
-								$('#buttonOrderItem').prop('disabled', false);
-								init();
-								
-								toastr.success(data.success);
-							});
-						});
+            $(".roulette-item").eq(35).html(html);
 
-					break;
-			}
-		});		  
-	}
-	
-	function buyItem(item_id){
-		dprice_bonus = $("#dprice_bonus option:selected").val()
-		
-		$.post("/buyItem/{donate_id}",{item_id: item_id, dprice_bonus:dprice_bonus},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':				
-					toastr.success(data.success);
-					init();
-					$('#ModalItem').modal('hide');
-					break;
-				}
-			});	
-	}
+            if ($(window).width() < 992) {
+              marginLeftRoulette = -665;
+              marginLeftRouletteStop = -8873;
+            } else {
+              marginLeftRoulette = -465;
+              marginLeftRouletteStop = -8673;
+            }
 
-	function activatePromo(){
-		promocode = $("#promocode").val();
-		
-		$.post("/activatePromo/{donate_id}",{promocode: promocode},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':		
-					$("#promocode").val('');
-					toastr.success(data.success);
-					init();
-					break;
-				}
-			});	
-	}
+            $(".roulette__railway").animate(
+              { marginLeft: marginLeftRoulette },
+              1,
+              function () {
+                $(".roulette__railway").animate(
+                  { marginLeft: marginLeftRouletteStop },
+                  1000,
+                  function () {
+                    $("#buttonOrderItem").prop("disabled", false);
+                    init();
 
-	function openModalPay(){
-	
-		$('#ModalPay').modal('show');
-	}
-	
-	function pay(){
-		sumPay = $("#sumPay").val();
-		$.post("/pay/{donate_id}",{sumPay: sumPay},function(data){
-			////console.log(data);
-			data = $.parseJSON(data);
-			switch(data.status) {
-				case 'error':
-					toastr.error(data.error);
-					break;
-				case 'success':				
-					window.location.replace(data.url);
-					break;
-				}
-			});		
-	
-	}
-	
+                    toastr.success(data.success);
+                  }
+                );
+              }
+            );
 
+            break;
+        }
+      }
+    );
+  }
 
+  function buyItem(item_id) {
+    dprice_bonus = $("#dprice_bonus option:selected").val();
 
-	function initModules(){
-		game = '{game_donate}';
-		if(game == 'theisle'){
-			var jar = document.createElement('script');
-			jar.src = '/getModule/{donate_id}/slots.js';
-			document.querySelector("script").appendChild(jar);
-			
-			jar.onload = function(){
-				if(window.location.pathname.split('/')[1] == 'slots')
-					initSlots();
-			}
-		}
-	}
-	
-	
-	function getTimeRemaining(endtime) {
-	  var t = Date.parse(endtime) - Date.parse(new Date());
-	  var seconds = Math.floor((t / 1000) % 60);
-	  var minutes = Math.floor((t / 1000 / 60) % 60);
-	  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-	  var days = Math.floor(t / (1000 * 60 * 60 * 24));
-	  return {
-		'total': t,
-		'days': days,
-		'hours': hours,
-		'minutes': minutes,
-		'seconds': seconds
-	  };
-	}
+    $.post(
+      "/buyItem/{donate_id}",
+      { item_id: item_id, dprice_bonus: dprice_bonus },
+      function (data) {
+        ////console.log(data);
+        data = $.parseJSON(data);
+        switch (data.status) {
+          case "error":
+            toastr.error(data.error);
+            break;
+          case "success":
+            toastr.success(data.success);
+            init();
+            $("#ModalItem").modal("hide");
+            break;
+        }
+      }
+    );
+  }
 
-	function initializeClock(endtime) {
+  function activatePromo() {
+    promocode = $("#promocode").val();
 
-	  var minutesSpan = document.getElementById('timer_minutes');
-	  var secondsSpan = document.getElementById('timer_seconds');
+    $.post(
+      "/activatePromo/{donate_id}",
+      { promocode: promocode },
+      function (data) {
+        ////console.log(data);
+        data = $.parseJSON(data);
+        switch (data.status) {
+          case "error":
+            toastr.error(data.error);
+            break;
+          case "success":
+            $("#promocode").val("");
+            toastr.success(data.success);
+            init();
+            break;
+        }
+      }
+    );
+  }
 
-	  function updateClock() {
-		var t = getTimeRemaining(endtime);
+  function openModalPay() {
+    $("#ModalPay").modal("show");
+  }
 
-		minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-		secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+  function pay() {
+    sumPay = $("#sumPay").val();
+    $.post("/pay/{donate_id}", { sumPay: sumPay }, function (data) {
+      ////console.log(data);
+      data = $.parseJSON(data);
+      switch (data.status) {
+        case "error":
+          toastr.error(data.error);
+          break;
+        case "success":
+          window.location.replace(data.url);
+          break;
+      }
+    });
+  }
 
-		if (t.total <= 0) {
-		  clearInterval(timeinterval);
-		  setTimeout("location.reload()", 1500);
-		 //location.reload();
-		}
-	  }
+  function initModules() {
+    game = "{game_donate}";
+    if (game == "theisle") {
+      var jar = document.createElement("script");
+      jar.src = "/getModule/{donate_id}/slots.js";
+      document.querySelector("script").appendChild(jar);
 
-	  updateClock();
-	  var timeinterval = setInterval(updateClock, 1000);
-	}	
+      jar.onload = function () {
+        if (window.location.pathname.split("/")[1] == "slots") initSlots();
+      };
+    }
+  }
+
+  function getTimeRemaining(endtime) {
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor((t / 1000) % 60);
+    var minutes = Math.floor((t / 1000 / 60) % 60);
+    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    return {
+      total: t,
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+    };
+  }
+
+  function initializeClock(endtime) {
+    var minutesSpan = document.getElementById("timer_minutes");
+    var secondsSpan = document.getElementById("timer_seconds");
+
+    function updateClock() {
+      var t = getTimeRemaining(endtime);
+
+      minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
+      secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+
+      if (t.total <= 0) {
+        clearInterval(timeinterval);
+        setTimeout("location.reload()", 1500);
+        //location.reload();
+      }
+    }
+
+    updateClock();
+    var timeinterval = setInterval(updateClock, 1000);
+  }
 </script>
-
-
-	
