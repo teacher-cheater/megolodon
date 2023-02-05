@@ -62,16 +62,18 @@
 
     .navbar {
       width: 100% !important;
-      background: rgba(6, 66, 9, 0.507) !important;
-      background: #000 !important;
+      background: rgba(6, 66, 9) !important;
+      /*background: #000 !important;*/
       display: flex;
       justify-content: space-between;
     }
+
     @media (max-width: 992px) {
       .navbar {
         justify-content: space-between !important;
       }
     }
+
     /*.navbar-block nav {
       background: rgba(6, 66, 9, 0.507) !important;
     }*/
@@ -89,15 +91,16 @@
     }*/
 
     .nav__fixed {
-      position: fixed;
+      position: fixed !important;
       width: 100%;
-      background: rgba(6, 66, 9, 0.836) !important;
+      background: rgb(6, 66, 9) !important;
       justify-content: space-between !important;
       top: 0;
       -webkit-animation-name: show__navigation;
       animation-name: show__navigation;
       -webkit-animation-duration: 0.7s;
       animation-duration: 0.7s;
+      z-index: 100;
     }
 
     @-webkit-keyframes show__navigation {
@@ -127,7 +130,6 @@
     }
 
     .nav-link {
-      /*display: inline-block;*/
       position: relative;
     }
 
@@ -178,6 +180,7 @@
       margin-top: -16px;
       /*height: auto;*/
     }
+
     .main-m {
       display: none;
     }
@@ -185,12 +188,13 @@
     @media (max-width: 1023.98px) {
       .main-bg {
         height: 216vh;
+        object-fit: cover;
       }
     }
 
     @media (max-width: 767.98px) {
       .main-bg {
-        /*display: none;*/
+        object-fit: cover;
       }
       .main-m {
         /*display: block;*/
@@ -286,7 +290,7 @@
                 ><img
                   width="30px"
                   height="30px"
-                  src="img/logo-m.png"
+                  src="img/m-logo.png"
                   alt="logo"
               /></a>
               <a class="navbar-brand" href="#">{donate_name}</a>
@@ -370,7 +374,7 @@
           <a
             id="button_enter-game"
             class="enter-btn-game"
-            href="steam://connect/185.189.255.131:24315"
+            href="steam://connect185.189.255.131:24316"
             onclick=""
             >Начать играть</a
           >
