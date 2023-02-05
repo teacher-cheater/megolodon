@@ -60,36 +60,38 @@
       background-color: #1bff4f;
     }
 
-    #navbar {
+    .navbar {
       width: 100% !important;
       background: rgba(6, 66, 9, 0.507) !important;
       background: #000 !important;
-      /*margin: 0 auto !important;*/
+      display: flex;
+      justify-content: space-between;
     }
-
+    @media (max-width: 992px) {
+      .navbar {
+        justify-content: space-between !important;
+      }
+    }
     /*.navbar-block nav {
       background: rgba(6, 66, 9, 0.507) !important;
     }*/
 
-    #navigation-list {
+    /*#navigation-list {
       display: flex;
       gap: 10px;
-      /*max-width: 1110px;*/
-      /*background: rgba(6, 66, 9, 0.507) !important;*/
       justify-content: space-between !important;
-      /*position: fixed;*/
       width: 100%;
 
       top: 0;
       left: 50%;
       transform: translateX(-50%);
       z-index: 100;
-    }
+    }*/
 
     .nav__fixed {
       position: fixed;
       width: 100%;
-      background: rgba(6, 66, 9, 0.507) !important;
+      background: rgba(6, 66, 9, 0.836) !important;
       justify-content: space-between !important;
       top: 0;
       -webkit-animation-name: show__navigation;
@@ -121,11 +123,11 @@
     }
 
     .navbar-collapse {
-      flex-grow: 0;
+      flex-grow: 0 !important;
     }
 
     .nav-link {
-      display: inline-block;
+      /*display: inline-block;*/
       position: relative;
     }
 
@@ -163,10 +165,74 @@
       padding-top: 90px;
     }
 
+    .megalodon-bg {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      /*background: url("./img/main-bg.jpg") 0 0 / contain no-repeat;*/
+    }
+
     .main-bg {
-      height: 224vh;
+      height: 218vh;
       width: 100%;
       margin-top: -16px;
+      /*height: auto;*/
+    }
+    .main-m {
+      display: none;
+    }
+
+    @media (max-width: 1023.98px) {
+      .main-bg {
+        height: 216vh;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .main-bg {
+        /*display: none;*/
+      }
+      .main-m {
+        /*display: block;*/
+        object-fit: cover;
+      }
+    }
+
+    .block-pictures {
+      display: flex;
+      flex-direction: column;
+      justify-content: center !important;
+      align-items: center !important;
+      position: relative;
+    }
+
+    .enter-btn-game {
+      padding: 10px 20px;
+      border: none;
+      font-size: 17px;
+      color: #fff;
+      border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+      letter-spacing: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: 0.5s;
+      transition-property: box-shadow;
+      text-decoration-line: none !important;
+      display: flex;
+      position: absolute;
+      top: 30%;
+      z-index: 5;
+    }
+
+    .enter-btn-game {
+      background: rgb(6, 66, 9);
+      box-shadow: 0 0 10px rgb(6, 66, 9);
+    }
+
+    .enter-btn-game:hover {
+      box-shadow: 0 0 5px rgb(6, 66, 9), 0 0 10px rgb(6, 66, 9),
+        0 0 10px rgb(6, 66, 9), 0 0 20px rgb(6, 66, 9);
+      color: #fff;
     }
   </style>
 
@@ -278,7 +344,7 @@
                     class="nav-link"
                     href="#"
                     hidden
-                    >Баланс: 0руб.</a
+                    >Баланс: 0 руб.</a
                   >
                 </li>
                 <li class="nav-item active">
@@ -297,9 +363,17 @@
         </div>
       </div>
 
-      <div class="superpage" id="staticPageDiv">
-        <div class="">
+      <div class="superpage megalodon-bg" id="staticPageDiv">
+        <div class="block-pictures">
           <img src="img/main-bg.jpg" class="main-bg" alt="bg" />
+          <img src="img/main-m.jpg" class="main-m" alt="bg" />
+          <a
+            id="button_enter-game"
+            class="enter-btn-game"
+            href="steam://connect/185.189.255.131:24315"
+            onclick=""
+            >Начать играть</a
+          >
         </div>
       </div>
     </div>
