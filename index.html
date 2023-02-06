@@ -170,47 +170,49 @@
     .megalodon-bg {
       display: flex;
       flex-direction: column;
-      width: 100%;
-      /*background: url("./img/main-bg.jpg") 0 0 / contain no-repeat;*/
+      gap: 100px;
+      justify-content: center !important;
+      align-self: center !important;
+      align-items: center !important;
+      flex-grow: 1 !important;
     }
 
+    .content-wrap {
+      height: 100vh;
+    }
+    body {
+      background: url("./img/main-img.jpg") 0 0 / 100% no-repeat #000 !important;
+      padding: 0px 0 400px;
+    }
     .main-bg {
-      height: 218vh;
-      width: 100%;
-      margin-top: -16px;
-      /*height: auto;*/
-    }
-
-    .main-m {
-      display: none;
+      margin-bottom: 300px;
     }
 
     @media (max-width: 1023.98px) {
-      .main-bg {
-        height: 216vh;
-        object-fit: cover;
+      body {
+        /*height: 216vh;*/
+        /*object-fit: cover;*/
+        background: url("./img/main-img.jpg") 0 0 / cover no-repeat #000 !important;
+        padding: 0 0 300px 0;
       }
     }
 
-    @media (max-width: 767.98px) {
+    /*@media (max-width: 767.98px) {
       .main-bg {
         object-fit: cover;
       }
       .main-m {
-        /*display: block;*/
         object-fit: cover;
       }
-    }
+    }*/
 
     .block-pictures {
-      display: flex;
-      flex-direction: column;
-      justify-content: center !important;
-      align-items: center !important;
-      position: relative;
+      /*margin-top: 400px;*/
+      height: 200px;
     }
 
     .enter-btn-game {
+      /*margin-top: 400px;*/
       padding: 10px 20px;
       border: none;
       font-size: 17px;
@@ -223,21 +225,49 @@
       transition-property: box-shadow;
       text-decoration-line: none !important;
       display: flex;
-      position: absolute;
+      align-items: flex-end;
+      align-self: flex-end;
+      /*position: absolute;
       top: 30%;
-      z-index: 5;
+      z-index: 5;*/
     }
 
     .enter-btn-game {
-      background: rgb(6, 66, 9);
-      box-shadow: 0 0 10px rgb(6, 66, 9);
+      background: rgb(6, 66, 9) !important;
+      box-shadow: 0 0 10px rgb(6, 66, 9) !important;
     }
 
     .enter-btn-game:hover {
       box-shadow: 0 0 5px rgb(6, 66, 9), 0 0 10px rgb(6, 66, 9),
+        0 0 10px rgb(6, 66, 9), 0 0 20px rgb(6, 66, 9) !important;
+      color: #fff !important;
+    }
+
+    .block-monitoring {
+      margin-top: 100px;
+    }
+
+    .card-header {
+      text-align: center;
+      justify-content: center;
+      display: flex;
+      /*background: #000 !important;*/
+    }
+
+    .card-header button {
+      justify-content: center;
+      max-width: 200px;
+    }
+    /*.card-header button {
+      background-color: rgb(6, 66, 9) !important;
+      border-color: #fff;
+      box-shadow: 0 0 10px rgb(6 66 9) !important;
+    }
+    .card-header button:hover {
+      box-shadow: 0 0 5px rgb(6, 66, 9), 0 0 10px rgb(6, 66, 9),
         0 0 10px rgb(6, 66, 9), 0 0 20px rgb(6, 66, 9);
       color: #fff;
-    }
+    }*/
   </style>
 
   <script>
@@ -367,10 +397,10 @@
         </div>
       </div>
 
-      <div class="superpage megalodon-bg" id="staticPageDiv">
+      <div class="container superpage megalodon-bg" id="staticPageDiv">
         <div class="block-pictures">
-          <img src="img/main-bg.jpg" class="main-bg" alt="bg" />
-          <img src="img/main-m.jpg" class="main-m" alt="bg" />
+          <!--<img src="img/main-img.jpg" class="main-bg" alt="bg" />-->
+          <!--<img src="img/main-m.jpg" class="main-m" alt="bg" />-->
           <a
             id="button_enter-game"
             class="enter-btn-game"
@@ -379,13 +409,28 @@
             >Начать играть</a
           >
         </div>
+        <div class="block-monitoring col-sm-12" style="margin-bottom: 20px">
+          <div class="">
+            <div class="card-header bg-secondary text-light">Мониторинг</div>
+            <div class="card-body bg-dark text-light" id="monitoring_div"></div>
+            <div class="card-header bg-secondary text-light">
+              <button
+                type="button"
+                class="btn btn-danger btn-block enter-btn-game"
+                onClick="updateMonitoring(true)"
+              >
+                Обновить
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="container superpage" id="block_items" dpage="items">
       <div class="row">
         <div
-          class="col-sm-9 order-first order-md-2"
+          class="col-sm-12 order-first order-md-2"
           style="margin-bottom: 20px"
         >
           <div class="">
@@ -416,7 +461,7 @@
           <!--<font style="color: hsla(0,0%,100%,.3); font-size: 80%;">Размещенная на настоящем сайте информация носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями ч. 2 ст. 437 Гражданского кодекса Российской Федерации.</font>-->
         </div>
 
-        <div class="col-sm-3" style="margin-bottom: 20px">
+        <!--<div class="col-sm-3" style="margin-bottom: 20px">
           <div class="">
             <div class="card-header bg-secondary text-light">Мониторинг</div>
             <div class="card-body bg-dark text-light" id="monitoring_div"></div>
@@ -430,7 +475,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
 
