@@ -169,9 +169,12 @@
       flex-grow: 1 !important;
     }
 
+    .content-wrap {
+      /*background: url("./img/bg.jpg") 0 0 / 100% no-repeat #000 !important;*/
+      margin-bottom: 200px;
+    }
     body {
-      background: url("./img/bg.jpg") 0 0 / 100% no-repeat #000 !important;
-      padding: 0px 0 700px 0;
+      background: url("./img/bg.jpg") center 0 / cover no-repeat #000 !important;
     }
 
     .main-bg {
@@ -263,13 +266,28 @@
       justify-content: center;
       max-width: 200px;
     }
+
+    .block-news {
+      min-height: 100vh;
+      /*padding: 0px 0 700px 0;*/
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    @media (max-width: 1.98px) {
+    }
+
     @media (max-width: 1023.98px) {
       body {
-        background: url("./img/bg.jpg") 0 0 / cover no-repeat #000 !important;
+        background: url("./img/bg.jpg") center center / cover no-repeat #000 !important;
         padding: 0 0 300px 0;
       }
       .block-title {
         font-size: 90px;
+      }
+      .block-news {
+        min-height: 20vh;
+        padding: 0px 0 100px 0;
       }
     }
     @media (max-width: 767.98px) {
@@ -279,7 +297,7 @@
     }
     @media (max-width: 523.98px) {
       .block-title {
-        font-size: 48px;
+        font-size: 42px;
       }
     }
   </style>
@@ -413,7 +431,7 @@
 
       <div class="superpage megalodon-bg" id="staticPageDiv">
         <div class="block-pictures">
-          <h1 class="block-title">megaladon survival</h1>
+          <h1 class="block-title">megalodon survival</h1>
           <a
             id="button_enter-game"
             class="enter-btn-game"
@@ -492,8 +510,26 @@
       </div>
     </div>
 
-    <div class="container superpage" id="block_news" dpage="news" hidden>
+    <!--<div class="container superpage" id="block_news" dpage="news" hidden>
       <div class="row">
+        <div
+          class="col-sm-12 order-first order-md-2"
+          style="margin-bottom: 20px"
+        >
+          <div class="">
+            <div class="card-header bg-secondary text-light">Новости</div>
+            <div
+              class="card-body bg-dark text-light"
+              id="newsBlock"
+              style="word-wrap: break-word"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+    <div class="container superpage block-news" id="block_news" dpage="news">
+      <div class="row content-cards">
         <div
           class="col-sm-12 order-first order-md-2"
           style="margin-bottom: 20px"
