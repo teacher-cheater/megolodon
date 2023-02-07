@@ -163,9 +163,9 @@
       flex-grow: 1 !important;
     }
 
-    .content-wrap {
+    /*.content-wrap {
       height: 100vh;
-    }
+    }*/
 
     body {
       background: url("./img/main-img.jpg") 0 0 / 100% no-repeat #000 !important;
@@ -186,7 +186,12 @@
     .block-pictures {
       height: 200px;
     }
-
+    .card-header {
+      background: rgb(6, 66, 9) !important;
+    }
+    .card-body {
+      background: rgba(6, 66, 9, 0.8) !important;
+    }
     .enter-btn-game {
       padding: 10px 20px;
       border: none;
@@ -360,8 +365,6 @@
 
       <div class="container superpage megalodon-bg" id="staticPageDiv">
         <div class="block-pictures">
-          <!--<img src="img/main-img.jpg" class="main-bg" alt="bg" />-->
-          <!--<img src="img/main-m.jpg" class="main-m" alt="bg" />-->
           <a
             id="button_enter-game"
             class="enter-btn-game"
@@ -372,9 +375,9 @@
         </div>
         <div class="block-monitoring col-sm-12" style="margin-bottom: 20px">
           <div class="">
-            <div class="card-header bg-secondary text-light">Мониторинг</div>
+            <div class="card-header bg-success text-light">Мониторинг</div>
             <div class="card-body bg-dark text-light" id="monitoring_div"></div>
-            <div class="card-header bg-secondary text-light">
+            <div class="card-header bg-success text-light">
               <button
                 type="button"
                 class="btn btn-danger btn-block enter-btn-game"
@@ -388,7 +391,7 @@
       </div>
     </div>
 
-    <div class="container superpage" id="block_items" dpage="items">
+    <div class="container superpage" id="block_items" dpage="items" hidden>
       <div class="row">
         <div
           class="col-sm-12 order-first order-md-2"
