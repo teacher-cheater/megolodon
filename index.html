@@ -6,6 +6,12 @@
     <title>{donate_title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -156,19 +162,15 @@
       display: flex;
       flex-direction: column;
       padding: 450px 0;
-      gap: 50px;
+      gap: 100px;
       justify-content: center !important;
       align-self: center !important;
       align-items: center !important;
       flex-grow: 1 !important;
     }
 
-    /*.content-wrap {
-      height: 100vh;
-    }*/
-
     body {
-      background: url("./img/main-img.jpg") 0 0 / 100% no-repeat #000 !important;
+      background: url("./img/bg.jpg") 0 0 / 100% no-repeat #000 !important;
       padding: 0px 0 400px;
     }
 
@@ -176,26 +178,40 @@
       margin-bottom: 300px;
     }
 
-    @media (max-width: 1023.98px) {
-      body {
-        background: url("./img/main-img.jpg") 0 0 / cover no-repeat #000 !important;
-        padding: 0 0 300px 0;
-      }
+    .block-pictures {
+      display: flex !important;
+      flex-direction: column;
+      margin: 0 auto;
+      justify-content: center !important;
+      text-align: center !important;
     }
 
-    .block-pictures {
-      height: 200px;
-    }
     .card-header {
       background: rgb(6, 66, 9) !important;
     }
+
     .card-body {
       background: rgba(6, 66, 9, 0.8) !important;
       /*background: transparent !important;*/
     }
+
     .block-btn {
       background: transparent !important;
     }
+
+    .block-title {
+      font-family: "Goldman", cursive;
+      font-size: 122px;
+      color: rgba(255, 255, 255, 0.76);
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 1.1;
+      font-weight: 700;
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: 50px;
+    }
+
     .enter-btn-game {
       padding: 10px 20px;
       border: none;
@@ -209,9 +225,10 @@
       transition-property: box-shadow;
       text-decoration-line: none !important;
       display: flex;
-      align-items: flex-end;
-      align-self: flex-end;
+      align-self: center;
       justify-content: center;
+      max-width: 320px;
+      text-align: center;
     }
 
     .enter-btn-game {
@@ -225,15 +242,44 @@
       color: #fff !important;
     }
 
+    .block-monitoring {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .content-cards {
+      min-width: 230px;
+    }
     .card-header {
       text-align: center;
       justify-content: center;
       display: flex;
+      max-width: 320px;
+      align-self: center;
     }
 
     .card-header button {
       justify-content: center;
       max-width: 200px;
+    }
+    @media (max-width: 1023.98px) {
+      body {
+        background: url("./img/bg.jpg") 0 0 / cover no-repeat #000 !important;
+        padding: 0 0 300px 0;
+      }
+      .block-title {
+        font-size: 90px;
+      }
+    }
+    @media (max-width: 767.98px) {
+      .block-title {
+        font-size: 60px;
+      }
+    }
+    @media (max-width: 523.98px) {
+      .block-title {
+        font-size: 48px;
+      }
     }
   </style>
 
@@ -364,8 +410,9 @@
         </div>
       </div>
 
-      <div class="container superpage megalodon-bg" id="staticPageDiv">
+      <div class="superpage megalodon-bg" id="staticPageDiv">
         <div class="block-pictures">
+          <h1 class="block-title">megaladon survival</h1>
           <a
             id="button_enter-game"
             class="enter-btn-game"
@@ -375,7 +422,7 @@
           >
         </div>
         <div class="block-monitoring col-sm-12" style="margin-bottom: 20px">
-          <div class="">
+          <div class="content-cards">
             <div class="card-header text-light">Мониторинг</div>
             <div class="card-body text-light" id="monitoring_div"></div>
             <div class="text-light">
