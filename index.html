@@ -161,7 +161,6 @@
     .megalodon-bg {
       display: flex;
       flex-direction: column;
-      /*padding: 450px 0;*/
       gap: 100px;
       justify-content: center !important;
       align-self: center !important;
@@ -170,10 +169,12 @@
     }
 
     .content-wrap {
-      /*background: url("./img/bg.jpg") 0 0 / 100% no-repeat #000 !important;*/
       margin-bottom: 200px;
+      flex-grow: 1;
     }
     body {
+      display: flex;
+      flex-direction: column;
       background: url("./img/bg.jpg") center 0 / cover no-repeat #000 !important;
     }
 
@@ -252,7 +253,7 @@
       width: 100%;
     }
     .content-cards {
-      min-width: 230px;
+      min-width: 300px;
     }
     .card-header {
       text-align: center;
@@ -269,12 +270,11 @@
 
     .block-news {
       min-height: 100vh;
-      /*padding: 0px 0 700px 0;*/
+      padding: 0px 0 700px 0;
       display: flex;
       justify-content: center;
+      align-items: flex-end;
       width: 100%;
-    }
-    @media (max-width: 1.98px) {
     }
 
     @media (max-width: 1023.98px) {
@@ -293,6 +293,9 @@
     @media (max-width: 767.98px) {
       .block-title {
         font-size: 60px;
+      }
+      body {
+        padding: 0 0 100px 0;
       }
     }
     @media (max-width: 523.98px) {
