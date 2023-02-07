@@ -191,13 +191,17 @@
     }
     .card-body {
       background: rgba(6, 66, 9, 0.8) !important;
+      /*background: transparent !important;*/
+    }
+    .block-btn {
+      background: transparent !important;
     }
     .enter-btn-game {
       padding: 10px 20px;
       border: none;
       font-size: 17px;
       color: #fff;
-      border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+      border-radius: calc(0.25rem - 1px);
       letter-spacing: 4px;
       font-weight: 700;
       text-transform: uppercase;
@@ -207,6 +211,7 @@
       display: flex;
       align-items: flex-end;
       align-self: flex-end;
+      justify-content: center;
     }
 
     .enter-btn-game {
@@ -219,10 +224,6 @@
         0 0 10px rgb(6, 66, 9), 0 0 20px rgb(6, 66, 9) !important;
       color: #fff !important;
     }
-    /*
-    .block-monitoring {
-      margin-top: 100px;
-    }*/
 
     .card-header {
       text-align: center;
@@ -375,12 +376,12 @@
         </div>
         <div class="block-monitoring col-sm-12" style="margin-bottom: 20px">
           <div class="">
-            <div class="card-header bg-success text-light">Мониторинг</div>
-            <div class="card-body bg-dark text-light" id="monitoring_div"></div>
-            <div class="card-header bg-success text-light">
+            <div class="card-header text-light">Мониторинг</div>
+            <div class="card-body text-light" id="monitoring_div"></div>
+            <div class="text-light">
               <button
                 type="button"
-                class="btn btn-danger btn-block enter-btn-game"
+                class="btn btn-block enter-btn-game"
                 onClick="updateMonitoring(true)"
               >
                 Обновить
@@ -425,21 +426,21 @@
           <!--<font style="color: hsla(0,0%,100%,.3); font-size: 80%;">Размещенная на настоящем сайте информация носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями ч. 2 ст. 437 Гражданского кодекса Российской Федерации.</font>-->
         </div>
 
-        <!--<div class="col-sm-3" style="margin-bottom: 20px">
+        <div class="col-sm-3" style="margin-bottom: 20px">
           <div class="">
-            <div class="card-header bg-secondary text-light">Мониторинг</div>
+            <div class="card-header text-light">Мониторинг</div>
             <div class="card-body bg-dark text-light" id="monitoring_div"></div>
-            <div class="card-header bg-secondary text-light">
+            <div class="card-header text-light">
               <button
                 type="button"
-                class="btn btn-danger btn-block"
+                class="btn btn-block enter-btn-game"
                 onClick="updateMonitoring(true)"
               >
                 Обновить
               </button>
             </div>
           </div>
-        </div>-->
+        </div>
       </div>
     </div>
 
