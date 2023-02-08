@@ -170,11 +170,13 @@
 
     .content-wrap {
       margin-bottom: 200px;
-      padding-top: 300px;
+      /*padding-top: 300px;*/
+      /*max-width: 1200px;*/
+      /*margin: 0 auto;*/
     }
 
     body {
-      background: url("./img/bg.jpg") center 60% / cover no-repeat #000 !important;
+      background: url("./img/bg.jpg") center 0% / cover no-repeat rgb(4, 17, 32) !important;
     }
 
     .main-bg {
@@ -535,7 +537,12 @@
       </div>
     </div>-->
 
-    <div class="container superpage block-news" id="block_news" dpage="news">
+    <div
+      class="container superpage block-news"
+      id="block_news"
+      dpage="news"
+      hidden
+    >
       <div class="row content-cards">
         <div
           class="col-sm-12 order-first order-md-2"
