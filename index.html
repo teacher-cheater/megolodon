@@ -170,11 +170,10 @@
 
     .content-wrap {
       margin-bottom: 200px;
-      flex-grow: 1;
+      padding-top: 300px;
     }
+
     body {
-      display: flex;
-      flex-direction: column;
       background: url("./img/bg.jpg") center 100% / cover no-repeat #000 !important;
     }
 
@@ -189,7 +188,7 @@
       justify-content: center !important;
       text-align: center !important;
 
-      height: 70vh;
+      height: 50vh;
     }
 
     .card-header {
@@ -270,7 +269,6 @@
 
     .block-news {
       min-height: 100vh;
-      /*padding: 0px 0 700px 0;*/
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -281,6 +279,12 @@
       body {
         background: url("./img/bg.jpg") center center / cover no-repeat #000 !important;
         padding: 0 0 300px 0;
+      }
+      .content-wrap {
+        padding-top: 60px;
+      }
+      .block-pictures {
+        height: 70vh;
       }
       .block-title {
         font-size: 90px;
